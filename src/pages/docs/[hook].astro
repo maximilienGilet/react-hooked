@@ -1,0 +1,25 @@
+---
+import jsdoc2json from '../../utils/jsdoc2json.ts';
+
+export async function getStaticPaths() {
+  const hooks: Record<string, string> = import.meta.glob('/src/hooks/*.ts', {query: '?raw', eager: true, import: 'default'});
+  return Object.keys(hooks).map((hook) => {
+    const hookName = hook.split('/').reverse()[0].split('.')[0];
+    const doc = jsdoc2json(hooks[hook]);
+    return {
+      params: { hook: hookName },
+      props: { hook: hooks[hook], hookName, doc },
+    }
+  });
+
+}
+
+const {hookName, hook, doc } = Astro.props;
+---
+<h1>{hookName}</h1>
+<p>{doc.description}</p>
+<pre>
+<code>
+{hook}
+</code>
+</pre>
