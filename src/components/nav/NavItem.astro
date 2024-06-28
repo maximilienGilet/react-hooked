@@ -1,0 +1,21 @@
+---
+import { cn } from "../../utils/cn";
+interface Props {
+  href: string;
+  text: string;
+  isSelected?: boolean;
+  isNew?: boolean;
+}
+
+const { href, text, isNew, isSelected } = Astro.props;
+console.log(isSelected);
+const selectedClasses = "text-zinc-950";
+---
+
+
+<li>
+  <a class={ cn("relative flex gap-2 text-sm/6 font-medium text-zinc-400 hover:text-zinc-950 hover:underline", isSelected && selectedClasses)} href={href}>
+    {text}
+    {isNew && <span class="whitespace-nowrap rounded-lg bg-lime-400/20 px-2 text-xs/6 font-semibold text-lime-700 ">New</span>}
+  </a>
+</li>
