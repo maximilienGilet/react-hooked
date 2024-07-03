@@ -24,7 +24,7 @@ const {hookName, hook, doc } = Astro.props;
   <p class="mb-6">{doc.description}</p>
   <div class="relative shadow-xl rounded-lg">
     <Code id="code" code={hook.trim()} lang="ts" theme="catppuccin-frappe" />
-    <button title="Copy" id="copy-button" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 z-20 text-zinc-50 hover:bg-white/10 hover:text-zinc-50 [&amp;_svg]:size-3 absolute right-4 top-4 p-4">
+    <button title="Copy" id="copy-button" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 z-20 text-zinc-50 hover:bg-white/10 hover:text-zinc-50 [&amp;_svg]:size-3 absolute right-2 top-2 p-3">
       <span class="sr-only">Copy</span>
       <svg id="copy-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" class="fill-current w-4 h-4">
         <rect width="256" height="256" fill="none"/>
