@@ -12,8 +12,8 @@ type JsDocJSON = {
 
 /**
  * Converts a JSDoc comment to a JSON representation.
- * @param input - The input string containing the JSDoc comment.
- * @returns The JSON representation of the JSDoc comment.
+ * @param {string} input - The input string containing the JSDoc comment.
+ * @returns {JsDocJSON} The JSON representation of the JSDoc comment.
  */
 export default function jsDoc2JSON(input: string): JsDocJSON {
   const jsDocJSON: JsDocJSON = { description: null, tags: [] };
@@ -29,8 +29,8 @@ export default function jsDoc2JSON(input: string): JsDocJSON {
 
 /**
  * Extracts the JSDoc comment from the input string.
- * @param input - The input string containing the JSDoc comment.
- * @returns The JSDoc comment or null if not found.
+ * @param {string} input - The input string containing the JSDoc comment.
+ * @returns {string | null} The JSDoc comment or null if not found.
  */
 function extractJsDocComment(input: string): string | null {
   const match = input.match(/\/\*\*.*\*\//s);
@@ -39,8 +39,8 @@ function extractJsDocComment(input: string): string | null {
 
 /**
  * Extracts the description from the JSDoc comment.
- * @param comment - The JSDoc comment.
- * @returns The description text or null if not found.
+ * @param {string} comment - The JSDoc comment.
+ * @returns {string | null} The description text or null if not found.
  */
 function extractDescription(comment: string): string | null {
   const match = comment.match(/^[^@]*/s);
@@ -55,8 +55,8 @@ function extractDescription(comment: string): string | null {
 
 /**
  * Extracts the tags from the JSDoc comment.
- * @param comment - The JSDoc comment.
- * @returns An array of parsed tags.
+ * @param {string} comment - The JSDoc comment.
+ * @returns {JsDocTag[]} An array of parsed tags.
  */
 function extractTags(comment: string): JsDocTag[] {
   const tags: JsDocTag[] = [];
@@ -68,6 +68,9 @@ function extractTags(comment: string): JsDocTag[] {
     } else if (el.startsWith("@return ") || el.startsWith("@returns ")) {
       const tag = parseReturnTag(el);
       if (tag) tags.push(tag);
+    } else if (el.startsWith("@requires ")) {
+      const tag = parseRequiresTag(el);
+      if (tag) tags.push(tag);
     } else {
       console.warn(`Unknown tag: ${el}`);
     }
@@ -77,8 +80,8 @@ function extractTags(comment: string): JsDocTag[] {
 
 /**
  * Extracts the raw tags from the JSDoc comment.
- * @param comment - The JSDoc comment.
- * @returns An array of raw tag strings.
+ * @param {string} comment - The JSDoc comment.
+ * @returns {string[]} An array of raw tag strings.
  */
 function getRawTags(comment: string): string[] {
   const match = comment.match(/@.*(?=\@)/s);
@@ -92,8 +95,8 @@ function getRawTags(comment: string): string[] {
 
 /**
  * Parses a @param tag into a JsDocTag object.
- * @param tag - The @param tag string.
- * @returns The parsed JsDocTag object or null if the tag is invalid.
+ * @param {string} tag - The @param tag string.
+ * @returns {JsDocTag | null} The parsed JsDocTag object or null if the tag is invalid.
  */
 function parseParamTag(tag: string): JsDocTag | null {
   let components = tag.match(
@@ -128,8 +131,8 @@ function parseParamTag(tag: string): JsDocTag | null {
 
 /**
  * Parses a @return or @returns tag into a JsDocTag object.
- * @param tag - The @return or @returns tag string.
- * @returns The parsed JsDocTag object or null if the tag is invalid.
+ * @param {string} tag - The @return or @returns tag string.
+ * @returns {JsDocTag | null} The parsed JsDocTag object or null if the tag is invalid.
  */
 function parseReturnTag(tag: string): JsDocTag | null {
   const components = tag.match(
@@ -145,5 +148,26 @@ function parseReturnTag(tag: string): JsDocTag | null {
   }
 
   console.warn(`Invalid @return tag: ${tag}`);
+  return null;
+}
+
+/**
+ * Parses a @requires tag into a JsDocTag object.
+ * @param {string} tag - The @requires tag string.
+ * @returns {JsDocTag | null} The parsed JsDocTag object or null if the tag is invalid.
+ */
+function parseRequiresTag(tag: string): JsDocTag | null {
+  const components = tag.split("@requires ");
+
+  if (components) {
+    return {
+      tag: "requires",
+      type:
+        components[1] && components[1].startsWith("./") ? "local" : "package",
+      description: components[1] || null,
+    };
+  }
+
+  console.warn(`Invalid @requires tag: ${tag}`);
   return null;
 }

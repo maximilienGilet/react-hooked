@@ -1,6 +1,7 @@
 ---
 import { Code } from 'astro:components';
 import DocsLayout from '../../layouts/DocsLayout.astro';
+import AlertBox from '../../components/AlertBox.astro';
 import { extractHookName } from '../../utils/hooks';
 import jsDoc2JSON from '../../utils/jsdoc2json.ts';
 
@@ -18,10 +19,46 @@ export async function getStaticPaths() {
 }
 
 const {hookName, hook, doc } = Astro.props;
+
+const requiredPackages = doc.tags.filter((el) => el.tag === "requires" && el.type === "package");
+const requiredLocals = doc.tags.filter((el) => el.tag === "requires" && el.type === "local");
 ---
 <DocsLayout title={hookName} selectedPage={hookName}>
   <h1 class="text-3xl mb-4">{hookName}</h1>
   <p class="mb-6">{doc.description}</p>
+{requiredPackages.length > 0 && (
+    <AlertBox>
+    <div slot="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-current" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><circle cx="128" cy="128" r="96" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="16"/><line x1="128" y1="136" x2="128" y2="80" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><circle cx="128" cy="172" r="12"/></svg>
+    </div>
+    <div slot="title">
+      This hook requires the following packages:
+      <span class="text-ctp-crust font-semibold">
+        {requiredPackages.map(requiredPackages => (
+          <a href={`https://www.npmjs.com/package/${requiredPackages.description}`} class="mr-1 text-ctp-crust font-semibold hover:underline" target="_blank">{requiredPackages.description}</a>
+        ))}
+      </span>
+    </div>
+    <div>
+      // TODO: Add installation instructions
+    </div>
+    </AlertBox>
+)}
+  {requiredLocals.length > 0 && (
+    <AlertBox>
+    <div slot="icon">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-current" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><circle cx="128" cy="128" r="96" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="16"/><line x1="128" y1="136" x2  ="128" y2="80" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><circle cx="128" cy="172" r="12"/></svg>
+    </div>
+    <div slot="title">
+      This hook requires the following hooks:
+      <span class="text-ctp-crust font-semibold">
+        {requiredLocals.map(requiredLocals => (
+          <a href={`/docs/${requiredLocals.description}`} class="mr-1 text-ctp-crust font-semibold hover:underline" target="_blank">{requiredLocals.description.split("./")[1]}</a>
+        ))}
+      </span>
+    </div>
+    </AlertBox>
+)}
   <div class="relative shadow-xl rounded-lg">
     <Code id="code" code={hook.trim()} lang="ts" theme="catppuccin-frappe" />
     <button title="Copy" id="copy-button" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 z-20 text-zinc-50 hover:bg-white/10 hover:text-zinc-50 [&amp;_svg]:size-3 absolute right-2 top-2 p-3">
