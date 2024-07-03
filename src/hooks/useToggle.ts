@@ -1,17 +1,20 @@
-import { type Reducer, useReducer } from "react";
+import { useCallback, useState } from "react";
 
-const toggleReducer = (state: boolean, nextValue?: any) =>
-  typeof nextValue === "boolean" ? nextValue : !state;
+import type { Dispatch, SetStateAction } from "react";
 
 /**
- * Toggle a boolean value.
- * @param {boolean} initialValue - The initial value of the boolean.
- * @returns {[value, setValue]} A tuple of [value, setValue], where value is a boolean and setValue is a function that takes a boolean as an argument and sets the value to that boolean.
+ * A hook that allows to toggle a boolean value.
+ * @param {boolean} defaultValue - The initial value of the boolean.
+ * @returns {[boolean, () => void, Dispatch<SetStateAction<boolean>>]} An array containing the current value, a function to toggle the value, and a function to set the value.
  */
-const useToggle = (
-  initialValue: boolean,
-): [boolean, (nextValue?: any) => void] => {
-  return useReducer<Reducer<boolean, any>>(toggleReducer, initialValue);
-};
+export default function useToggle(
+  defaultValue?: boolean,
+): [boolean, () => void, Dispatch<SetStateAction<boolean>>] {
+  const [value, setValue] = useState(!!defaultValue);
 
-export default useToggle;
+  const toggle = useCallback(() => {
+    setValue((x) => !x);
+  }, []);
+
+  return [value, toggle, setValue];
+}
