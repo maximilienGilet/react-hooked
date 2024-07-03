@@ -1,10 +1,14 @@
 import { useCallback, useEffect, useState } from "react";
 
+type UseHashReturn = [string, (newHash: string) => void];
+
 /**
  * Hook to read and write the hash of the current url. It also updates the hash when the url changes.
- * @returns {[string, (newHash: string) => void]} - The state of the hash and a function to set the hash
+ * @returns {UseHashReturn} An array of two elements:
+ * 1. The current hash of the url.
+ * 2. A function to set the hash of the url.
  */
-export const useHash = () => {
+export const useHash = (): UseHashReturn => {
   const [hash, setHash] = useState(() => window.location.hash);
 
   const onHashChange = useCallback(() => {

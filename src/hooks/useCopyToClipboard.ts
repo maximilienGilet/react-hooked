@@ -4,13 +4,15 @@ type CopiedValue = string | null;
 
 type CopyFn = (text: string) => Promise<boolean>;
 
+type CopyReturn = [CopiedValue, CopyFn];
+
 /**
  * A hook that allows to copy text to clipboard.
- * @returns An array of two elements:
+ * @returns {CopyReturn} An array of two elements:
  * 1. The current value of the copied text.
  * 2. A function to copy text to clipboard.
  */
-export default function useCopyToClipboard(): [CopiedValue, CopyFn] {
+export default function useCopyToClipboard(): CopyReturn {
   const [copiedText, setCopiedText] = useState<CopiedValue>(null);
 
   const copy: CopyFn = useCallback(async (text) => {

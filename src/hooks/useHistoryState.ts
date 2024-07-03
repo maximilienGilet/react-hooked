@@ -18,14 +18,14 @@ export type UseHistoryState<T = unknown> = (
 
 /**
  * React hook that tracks history of state
- * @param {T} initialState - initial state
+ * @param {T | (() => T)} initialState - initial state
  * @param {number} size - max size of history
  * @returns {UseHistoryState<T>} state, setState, and history
  */
 function useHistoryState<T>(
   initialState: T | (() => T),
   size = 20,
-): [T, SetState<T>, History<T>] {
+): UseHistoryState<T> {
   const [state, setState] = useState<T>(initialState);
   const [_, forceUpdate] = useState(0);
   const stateRef = useRef<T>(state);

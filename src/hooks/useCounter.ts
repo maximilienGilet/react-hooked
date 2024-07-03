@@ -13,7 +13,7 @@ type UseCounterReturn = {
 /**
  * A hook that allows to manage a counter.
  * @param {number} initialValue - The initial value of the counter.
- * @returns An object with the following properties:
+ * @returns {UseCounterReturn} An object with the following properties:
  * 1. count - The current value of the counter.
  * 2. increment - A function to increment the counter.
  * 3. decrement - A function to decrement the counter.

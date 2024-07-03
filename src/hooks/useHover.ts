@@ -8,12 +8,14 @@ export type Element =
   | ((state: boolean) => React.ReactElement<any>)
   | React.ReactElement<any>;
 
+type UseHoverReturn = [React.ReactElement<any>, boolean];
+
 /**
  * React hook to handle hover state
  * @param {Element} element
- * @returns {[React.ReactElement<any>, boolean]} [element, hover state]
+ * @returns {UseHoverReturn} [element, hover state]
  */
-const useHover = (element: Element): [React.ReactElement<any>, boolean] => {
+const useHover = (element: Element): UseHoverReturn => {
   const [state, setState] = useState(false);
 
   const onMouseEnter = (originalOnMouseEnter?: any) => (event: any) => {

@@ -30,7 +30,7 @@ type IntersectionReturn = [
 /**
  * A hook that allows to observe the intersection of an element with the viewport.
  * @param {UseIntersectionObserverOptions} options - The options for the hook.
- * @returns An array of three elements:
+ * @returns {UseIntersectionObserverReturn} An array of three elements:
  * 1. A function to update the observed element.
  * 2. A boolean indicating whether the element is currently intersecting the viewport.
  * 3. An IntersectionObserverEntry object containing information about the intersection.

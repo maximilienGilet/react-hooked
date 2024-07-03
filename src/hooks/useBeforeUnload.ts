@@ -6,7 +6,6 @@ import { useCallback, useEffect } from "react";
  * @param {boolean} enabled - A boolean or a function that returns a boolean. If the
  * function returns `false`, the event will be prevented.
  * @param {string | undefined} message - An optional message to display in the dialog.
- * @returns {Function} A function that can be called to remove the event listener.
  */
 export default function (
   enabled: boolean | (() => boolean) = true,

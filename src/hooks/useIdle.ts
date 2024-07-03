@@ -17,9 +17,9 @@ function throttle(
 /**
  * React hook that tracks idle state
  * @param {number} ms - time in milliseconds
- * @returns {UseIdleState} idle state
+ * @returns {boolean} idle state
  */
-export function useIdle(ms = 1000 * 60) {
+export function useIdle(ms = 1000 * 60): boolean {
   const [idle, setIdle] = useState(false);
 
   useEffect(() => {

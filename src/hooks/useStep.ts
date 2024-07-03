@@ -13,10 +13,12 @@ type UseStepActions = {
 
 type SetStepCallbackType = (step: number | ((step: number) => number)) => void;
 
+type UseStepReturn = [number, UseStepActions];
+
 /**
  * A hook that allows to manage and navigate between steps in a sequence.
  * @param {number} maxStep - The maximum step value.
- * @returns {[number, UseStepActions]} An array containing the current step value and an object with the following properties:
+ * @returns {UseStepReturn} An array containing the current step value and an object with the following properties:
  * 1. goToNextStep - A function to go to the next step.
  * 2. goToPrevStep - A function to go to the previous step.
  * 3. canGoToNextStep - A boolean indicating whether the next step is available.
@@ -24,7 +26,7 @@ type SetStepCallbackType = (step: number | ((step: number) => number)) => void;
  * 5. setStep - A function to set the step value.
  * 6. reset - A function to reset the step value to 1.
  */
-export default function useStep(maxStep: number): [number, UseStepActions] {
+export default function useStep(maxStep: number): UseStepReturn {
   const [currentStep, setCurrentStep] = useState(1);
 
   const canGoToNextStep = currentStep + 1 <= maxStep;
