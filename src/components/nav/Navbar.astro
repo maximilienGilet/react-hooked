@@ -13,10 +13,10 @@ const { items, selectedPage } = Astro.props;
 <nav class="sticky top-16 hidden max-h-[calc(100dvh-theme(spacing.16))] w-48 shrink-0 overflow-y-auto pb-16 pt-12 lg:block">
   <ul role="list">
     <li>
-      <a class={ cn( "flex items-center gap-x-3 py-1.5 text-sm/6 font-medium text-zinc-500 hover:text-zinc-950 hover:underline", selectedPage === "docs" && "text-zinc-950" ) } href="/docs">Getting started</a>
+      <a class={ cn( "flex items-center gap-x-3 py-1.5 text-sm/6 font-medium hover:underline", selectedPage === "docs" && "text-ctp-blue" ) } href="/docs">Getting started</a>
     </li>
     <li class="mt-6">
-      <div class="text-sm/6 font-medium text-zinc-950 ">Hooks</div>
+      <div class="text-lg font-semibold ">Hooks</div>
       <ul role="list" class="mt-4">
         {items.map((item: string) => (
           <NavItem text={item} href={`/docs/${item}`} isSelected={item === selectedPage} />
