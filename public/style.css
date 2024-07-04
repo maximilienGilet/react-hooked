@@ -1,3 +1,7 @@
+body {
+  transition: color 0.3s;
+}
+
 pre.astro-code {
   padding: 1rem;
 }
