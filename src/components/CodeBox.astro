@@ -1,0 +1,54 @@
+---
+import { Code } from 'astro:components';
+import type { LanguageRegistration, SpecialLanguage, BundledLanguage } from 'shiki';
+
+interface Props {
+  code: string;
+  lang?: BundledLanguage | SpecialLanguage | LanguageRegistration;
+  class?: string;
+}
+
+const {code, lang, class: className} = Astro.props;
+
+---
+
+<div class="relative">
+  <Code code={code} lang={lang ?? "ts"} theme="catppuccin-frappe" class={className} />
+  <button title="Copy" data-copy="action" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 z-20 text-zinc-50 hover:bg-white/10 hover:text-zinc-50 [&amp;_svg]:size-3 absolute right-2 top-2 p-3">
+    <span class="sr-only">Copy</span>
+    <svg data-copy="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" class="fill-current w-4 h-4">
+      <rect width="256" height="256" fill="none"/>
+      <path d="M160,40h40a8,8,0,0,1,8,8V216a8,8,0,0,1-8,8H56a8,8,0,0,1-8-8V48a8,8,0,0,1,8-8H96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
+      <path d="M88,72V64a40,40,0,0,1,80,0v8Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
+    </svg>
+    <span data-copy="copied-text" class="hidden h-4">✅ Copied !</span>
+  </button>
+</div>
+
+<script>
+
+  function setupCopyButtons() {
+    const copyButtons = document.querySelectorAll('[data-copy="action"]');
+    copyButtons?.forEach(copyButton => {
+      copyButton?.addEventListener('click', () => {
+        const copiedText = copyButton?.parentElement?.querySelector('[data-copy="copied-text"]');
+        const copyIcon = copyButton?.parentElement?.querySelector('[data-copy="icon"]');
+        navigator.clipboard.writeText(copyButton?.parentElement?.getElementsByTagName('code')[0].innerText ?? '');
+        copiedText?.classList.remove('hidden');
+        copyIcon?.classList.add('hidden');
+        setTimeout(() => {
+          copiedText?.classList.add('hidden');
+          copyButton?.classList.remove('bg-ctp-green');
+          copyIcon?.classList.remove('hidden');
+        }, 2000);
+      });
+    });
+  }
+
+  setupCopyButtons();
+
+
+  document.addEventListener("astro:after-swap", () => {
+    setupCopyButtons();
+  });
+</script>

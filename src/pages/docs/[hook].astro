@@ -2,8 +2,10 @@
 import { Code } from 'astro:components';
 import DocsLayout from '../../layouts/DocsLayout.astro';
 import AlertBox from '../../components/AlertBox.astro';
+import PackageCommand from '../../components/PackageCommand.astro';
 import { extractHookName } from '../../utils/hooks';
 import jsDoc2JSON from '../../utils/jsdoc2json.ts';
+import CodeBox from '../../components/CodeBox.astro';
 
 export async function getStaticPaths() {
   const hooks: Record<string, string> = import.meta.glob('/src/hooks/*.ts', {query: '?raw', eager: true, import: 'default'});
@@ -39,8 +41,8 @@ const requiredLocals = doc.tags.filter((el) => el.tag === "requires" && el.type 
         ))}
       </span>
     </div>
-    <div>
-      // TODO: Add installation instructions
+    <div class="mt-4">
+      <PackageCommand packageNames={requiredPackages.map(p => p.description ?? "")} />
     </div>
     </AlertBox>
 )}
@@ -53,27 +55,16 @@ const requiredLocals = doc.tags.filter((el) => el.tag === "requires" && el.type 
       This hook requires the following hooks:
       <span class="text-ctp-crust font-semibold">
         {requiredLocals.map(requiredLocals => (
-          <a href={`/docs/${requiredLocals.description}`} class="mr-1 text-ctp-crust font-semibold hover:underline" target="_blank">{requiredLocals.description.split("./")[1]}</a>
+          <a href={`/docs/${requiredLocals.description}`} class="mr-1 text-ctp-crust font-semibold hover:underline" target="_blank">{requiredLocals.description?.split("./")[1]}</a>
         ))}
       </span>
     </div>
     </AlertBox>
 )}
-  <div class="relative shadow-xl rounded-lg">
-    <Code id="code" code={hook.trim()} lang="ts" theme="catppuccin-frappe" />
-    <button title="Copy" id="copy-button" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 z-20 text-zinc-50 hover:bg-white/10 hover:text-zinc-50 [&amp;_svg]:size-3 absolute right-2 top-2 p-3">
-      <span class="sr-only">Copy</span>
-      <svg id="copy-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" class="fill-current w-4 h-4">
-        <rect width="256" height="256" fill="none"/>
-        <path d="M160,40h40a8,8,0,0,1,8,8V216a8,8,0,0,1-8,8H56a8,8,0,0,1-8-8V48a8,8,0,0,1,8-8H96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
-        <path d="M88,72V64a40,40,0,0,1,80,0v8Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
-      </svg>
-      <span id="copied-text" class="hidden">✅ Copied !</span>
-    </button>
-  </div>
+  <CodeBox code={hook.trim()} lang="ts" class="rounded-xl shadow-xl" />
 
   <div class="mt-12 text-center">
-    <button id="download-button" class="bg-ctp-blue hover:bg-ctp-pink text-ctp-base text-xl py-4 px-8 rounded-lg inline-flex items-center transition-all shadow hover:shadow-lg">
+    <button data-action="download" class="bg-ctp-blue hover:bg-ctp-pink text-ctp-base text-xl py-4 px-8 rounded-lg inline-flex items-center transition-all shadow hover:shadow-lg">
       <svg class="fill-current w-6 h-6 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
         <rect width="256" height="256" fill="none"/>
         <path d="M200,224H56a8,8,0,0,1-8-8V40a8,8,0,0,1,8-8h96l56,56V216A8,8,0,0,1,200,224Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
@@ -86,32 +77,19 @@ const requiredLocals = doc.tags.filter((el) => el.tag === "requires" && el.type 
   </div>
 
 
-  <script define:vars={{ hookName }}>
-    // Copy button
-    const copyButton = document.getElementById('copy-button');
-    const copiedText = document.getElementById('copied-text');
-    const copyIcon = document.getElementById('copy-icon');
-    copyButton.addEventListener('click', () => {
-      navigator.clipboard.writeText(document.getElementById('code').innerText);
-      copiedText.classList.remove('hidden');
-      copyIcon.classList.add('hidden');
-      setTimeout(() => {
-        copiedText.classList.add('hidden');
-        copyButton.classList.remove('bg-ctp-green');
-        copyIcon.classList.remove('hidden');
-      }, 2000);
-    });
-
+  <script define:vars={{ hookName, hook }}>
     // Download button
-    const downloadButton = document.getElementById('download-button');
-    downloadButton.addEventListener('click', () => {
-      const blob = new Blob([document.getElementById('code').innerText], { type: 'text/plain' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `${hookName}.ts`;
-      a.click();
-      URL.revokeObjectURL(url);
+    const downloadButtons = document.querySelectorAll('[data-action="download"]');
+    downloadButtons.forEach(downloadButton => {
+      downloadButton.addEventListener('click', () => {
+        const blob = new Blob([hook.trim()], { type: 'text/plain' }); 
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${hookName}.ts`;
+        a.click();
+        URL.revokeObjectURL(url);
+      });
     });
   </script>
 
