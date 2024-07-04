@@ -7,8 +7,12 @@ export function getHooks() {
   return hooks;
 }
 
+export function extractHookFileName(hook: string) {  
+  return hook.split("/").pop();
+}
+
 export function extractHookName(hook: string) {
-  return hook.split("/").pop()?.split(".").shift() ?? hook;
+  return extractHookFileName(hook).split(".").shift() ?? hook;
 }
 
 export function getHooksNames() {
