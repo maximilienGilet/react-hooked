@@ -99,69 +99,55 @@ const requiredLocals = doc.tags.filter((el) => el.tag === "requires" && el.type 
 )}
   <CodeBox code={hook.trim()} lang="ts" class="rounded-xl shadow-xl" />
 
-  <div class="mt-12 text-center">
-    <button data-action="download" class="bg-ctp-blue hover:bg-ctp-pink text-ctp-base text-xl py-4 px-8 rounded-lg inline-flex items-center transition-all shadow hover:shadow-lg">
-      <svg class="fill-current w-6 h-6 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
-        <rect width="256" height="256" fill="none"/>
-        <path d="M200,224H56a8,8,0,0,1-8-8V40a8,8,0,0,1,8-8h96l56,56V216A8,8,0,0,1,200,224Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
-        <polyline points="152 32 152 88 208 88" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
-        <line x1="128" y1="120" x2="128" y2="184" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
-        <polyline points="104 160 128 184 152 160" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
-      </svg>
-      <span>Download</span>
-    </button>
-  </div>
-
-
-  <script define:vars={{ hookName, hook }}>
-    // Download button
-    const downloadButtons = document.querySelectorAll('[data-action="download"]');
-    downloadButtons.forEach(downloadButton => {
-      downloadButton.addEventListener('click', () => {
-        const blob = new Blob([hook.trim()], { type: 'text/plain' }); 
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `${hookName}.ts`;
-        a.click();
-        URL.revokeObjectURL(url);
-      });
+<script define:vars={{ hookName, hook }}>
+  // Download button
+  const downloadButtons = document.querySelectorAll('[data-action="download"]');
+  downloadButtons.forEach(downloadButton => {
+    downloadButton.addEventListener('click', () => {
+      const blob = new Blob([hook.trim()], { type: 'text/plain' }); 
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${hookName}.ts`;
+      a.click();
+      URL.revokeObjectURL(url);
     });
+  });
 
-    // Copy button
-    const copyButtons = document.querySelectorAll('[data-action="copy"]');
-    copyButtons.forEach(copyButton => {
-      copyButton.addEventListener('click', () => {
-        navigator.clipboard.writeText(hook.trim());
-      });
+  // Copy button
+  const copyButtons = document.querySelectorAll('[data-action="copy"]');
+  copyButtons.forEach(copyButton => {
+    copyButton.addEventListener('click', () => {
+      navigator.clipboard.writeText(hook.trim());
     });
+  });
 
-    function hideDownloadOptions() {
-      downloadOptionsContainer.classList.remove('flex');
-      downloadOptionsContainer.classList.add('hidden');
-      downloadOptionsContainer.classList.remove('animate-fade-in-down');
+  function hideDownloadOptions() {
+    downloadOptionsContainer.classList.remove('flex');
+    downloadOptionsContainer.classList.add('hidden');
+    downloadOptionsContainer.classList.remove('animate-fade-in-down');
+  }
+
+  // Show download options
+  const downloadOptionsContainer = document.querySelector('[data-container="downloadOptions"]');
+  const showDownloadOptionsButton = document.querySelector('[data-action="showDownloadOptions"]');
+  showDownloadOptionsButton.addEventListener('click', () => {
+    if (downloadOptionsContainer.classList.contains('hidden')) {
+    downloadOptionsContainer.classList.remove('hidden');
+    downloadOptionsContainer.classList.add('flex')
+    downloadOptionsContainer.classList.add('animate-fade-in-down');
+    } else {
+      hideDownloadOptions();
     }
+  });
 
-    // Show download options
-    const downloadOptionsContainer = document.querySelector('[data-container="downloadOptions"]');
-    const showDownloadOptionsButton = document.querySelector('[data-action="showDownloadOptions"]');
-    showDownloadOptionsButton.addEventListener('click', () => {
-      if (downloadOptionsContainer.classList.contains('hidden')) {
-      downloadOptionsContainer.classList.remove('hidden');
-      downloadOptionsContainer.classList.add('flex')
-      downloadOptionsContainer.classList.add('animate-fade-in-down');
-      } else {
-        hideDownloadOptions();
-      }
-    });
-
-    // Hide download options on click outside
-    document.addEventListener('click', (e) => {
-      if (!showDownloadOptionsButton.contains(e.target) && !downloadOptionsContainer.contains(e.target) && downloadOptionsContainer.classList.contains('flex')) {
-        hideDownloadOptions();
-      }
-    });
-  </script>
+  // Hide download options on click outside
+  document.addEventListener('click', (e) => {
+    if (!showDownloadOptionsButton.contains(e.target) && !downloadOptionsContainer.contains(e.target) && downloadOptionsContainer.classList.contains('flex')) {
+      hideDownloadOptions();
+    }
+  });
+</script>
 
 
 </DocsLayout>
