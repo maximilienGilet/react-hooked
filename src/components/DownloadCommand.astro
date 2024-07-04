@@ -23,12 +23,11 @@ const {hookName} = Astro.props;
 
   <div class="basis-full h-0"></div>
 
-  <!-- TODO: dynamic download link -->
-  <div class=" hidden peer-checked/tab-curl:block w-full">
-    <CodeBox code={`curl ${site}/${hookName}.ts --output src/hooks/${hookName}.ts`} lang="bash" class="rounded-lg rounded-tl-none" />
+  <div class="hidden peer-checked/tab-curl:block w-full">
+    <CodeBox code={`curl ${site}/raw/${hookName}.ts --output src/hooks/${hookName}.ts`} lang="bash" class="rounded-lg rounded-tl-none" />
   </div>
-  <div class=" hidden peer-checked/tab-wget:block w-full">
-    <CodeBox code={`wget --output-document src/hooks/${hookName}.ts ${site}/${hookName}.ts`} lang="bash" class="rounded-lg rounded-tl-none" />
+  <div class="hidden peer-checked/tab-wget:block w-full">
+    <CodeBox code={`wget --output-document src/hooks/${hookName}.ts ${site}/raw/${hookName}.ts`} lang="bash" class="rounded-lg rounded-tl-none" />
   </div>
 
 </section>
