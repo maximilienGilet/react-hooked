@@ -24,8 +24,19 @@ const { items, selectedPage } = Astro.props;
 </div>
 
 <script>
-  const select = document.getElementById("mobile-select");
-  select?.addEventListener("change", (e) => {
-    window.location.href = e.target!.value;
+
+  function setupSelect() {
+    const select = document.getElementById("mobile-select");
+    if (select) {
+      select.addEventListener("change", (e) => {
+        window.location.href = e.target!.value;
+      });
+    }
+  }
+
+  setupSelect();
+
+  document.addEventListener("astro:after-swap", () => {
+    setupSelect();
   });
 </script>
