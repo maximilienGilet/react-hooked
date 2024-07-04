@@ -28,13 +28,17 @@ const { items, selectedPage } = Astro.props;
 
 <script>
   document.addEventListener("astro:before-swap", () => {
-    sessionStorage.setItem("scrollPosition", document.getElementById("nav-list").scrollTop.toString());
+    const navList = document.getElementById("nav-list");
+    if (navList) {
+      sessionStorage.setItem("scrollPosition", navList.scrollTop.toString());
+    }
   });
 
   document.addEventListener("astro:after-swap", () => {
     const scrollPosition = sessionStorage.getItem("scrollPosition");
-    if (scrollPosition) {
-      document.getElementById("nav-list").scrollTo({
+    const navList = document.getElementById("nav-list");
+    if (scrollPosition && navList) {
+      navList.scrollTo({
         top: parseInt(scrollPosition, 10),
         behavior: "instant",
       });
