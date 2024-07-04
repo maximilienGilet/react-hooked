@@ -1,0 +1,34 @@
+---
+import CodeBox from './CodeBox.astro';
+
+interface Props {
+  hookName: string;
+}
+
+const site = import.meta.env.SITE
+
+const {hookName} = Astro.props;
+---
+
+<section class="flex flex-row flex-wrap ctp-frappe">
+  <input id="tab-curl" type="radio" name="download-tabs" class="peer/tab-curl opacity-0 absolute" checked />
+  <label for="tab-curl" class="peer-checked/tab-curl:bg-ctp-base bg-ctp-surface1 text-ctp-text cursor-pointer p-2 px-4 rounded-t-lg flex flex-row items-stretch gap-2">
+    cURL
+  </label>
+
+  <input id="tab-wget" type="radio" name="download-tabs" class="peer/tab-wget opacity-0 absolute" />
+  <label for="tab-wget" class="peer-checked/tab-wget:bg-ctp-base bg-ctp-surface1 text-ctp-text cursor-pointer p-2 px-4 rounded-t-lg flex flex-row items-stretch gap-2">
+    wget
+  </label>
+
+  <div class="basis-full h-0"></div>
+
+  <!-- TODO: dynamic download link -->
+  <div class=" hidden peer-checked/tab-curl:block w-full">
+    <CodeBox code={`curl ${site}/${hookName}.ts --output src/hooks/${hookName}.ts`} lang="bash" class="rounded-lg rounded-tl-none" />
+  </div>
+  <div class=" hidden peer-checked/tab-wget:block w-full">
+    <CodeBox code={`wget --output-document src/hooks/${hookName}.ts ${site}/${hookName}.ts`} lang="bash" class="rounded-lg rounded-tl-none" />
+  </div>
+
+</section>

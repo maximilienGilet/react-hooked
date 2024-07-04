@@ -2,6 +2,7 @@
 import DocsLayout from '../../layouts/DocsLayout.astro';
 import AlertBox from '../../components/AlertBox.astro';
 import PackageCommand from '../../components/PackageCommand.astro';
+import DownloadCommand from '../../components/DownloadCommand.astro';
 import { extractHookName } from '../../utils/hooks';
 import jsDoc2JSON from '../../utils/jsdoc2json.ts';
 import CodeBox from '../../components/CodeBox.astro';
@@ -25,7 +26,43 @@ const requiredPackages = doc.tags.filter((el) => el.tag === "requires" && el.typ
 const requiredLocals = doc.tags.filter((el) => el.tag === "requires" && el.type === "local");
 ---
 <DocsLayout title={hookName} selectedPage={hookName}>
-  <h1 class="text-3xl mb-4">{hookName}</h1>
+  <div class="flex items-center justify-between mb-4 relative">
+    <h1 class="text-3xl">{hookName}</h1>
+    <button data-action="showDownloadOptions" class="bg-ctp-blue hover:bg-ctp-pink text-ctp-base py-2 px-4 rounded-lg inline-flex items-center transition-all shadow hover:shadow-lg">
+      <span>Get this hook</span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" class="h-6 w-6 fill-current ml-2">
+        <polyline points="96 104 128 72 160 104" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
+        <polyline points="160 152 128 184 96 152" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
+    </button>
+    <div data-container="downloadOptions" class="absolute top-11 right-0 hidden flex-col items-stretch justify-stretch bg-ctp-surface1 lg:w-[500px] p-4 rounded-lg z-30 shadow-lg">
+      <div class="pb-4 mb-2 border-b-ctp-surface2 border-b">
+        <DownloadCommand hookName={hookName} />
+      </div>
+      <div>
+        <button data-action="copy" class="hover:bg-ctp-surface2 text-ctp-text p-2 rounded-lg inline-flex items-center transition-all w-full active:bg-ctp-green active:text-ctp-base">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" class="h-6 w-6 fill-current mr-4">
+              <rect width="256" height="256" fill="none"/>
+              <polyline points="168 168 216 168 216 40 88 40 88 88" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
+              <rect x="40" y="88" width="128" height="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
+          </svg>
+          <span>Copy file</span>
+        </button>
+      </div>
+      <div>
+        <button data-action="download" class="hover:bg-ctp-surface2 text-ctp-text p-2 rounded-lg inline-flex items-center transition-all w-full">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" class="h-6 w-6 fill-current mr-4">
+              <rect width="256" height="256" fill="none"/>
+              <path d="M200,224H56a8,8,0,0,1-8-8V40a8,8,0,0,1,8-8h96l56,56V216A8,8,0,0,1,200,224Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
+              <polyline points="152 32 152 88 208 88" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
+              <line x1="128" y1="120" x2="128" y2="184" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
+              <polyline points="104 160 128 184 152 160" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
+          </svg>
+          <span>Download file</span>
+        </button>
+      </div>
+      </div>
+    </div>
+  </div>
   <p class="mb-6">{doc.description}</p>
 {requiredPackages.length > 0 && (
     <AlertBox>
@@ -89,6 +126,40 @@ const requiredLocals = doc.tags.filter((el) => el.tag === "requires" && el.type 
         a.click();
         URL.revokeObjectURL(url);
       });
+    });
+
+    // Copy button
+    const copyButtons = document.querySelectorAll('[data-action="copy"]');
+    copyButtons.forEach(copyButton => {
+      copyButton.addEventListener('click', () => {
+        navigator.clipboard.writeText(hook.trim());
+      });
+    });
+
+    function hideDownloadOptions() {
+      downloadOptionsContainer.classList.remove('flex');
+      downloadOptionsContainer.classList.add('hidden');
+      downloadOptionsContainer.classList.remove('animate-fade-in-down');
+    }
+
+    // Show download options
+    const downloadOptionsContainer = document.querySelector('[data-container="downloadOptions"]');
+    const showDownloadOptionsButton = document.querySelector('[data-action="showDownloadOptions"]');
+    showDownloadOptionsButton.addEventListener('click', () => {
+      if (downloadOptionsContainer.classList.contains('hidden')) {
+      downloadOptionsContainer.classList.remove('hidden');
+      downloadOptionsContainer.classList.add('flex')
+      downloadOptionsContainer.classList.add('animate-fade-in-down');
+      } else {
+        hideDownloadOptions();
+      }
+    });
+
+    // Hide download options on click outside
+    document.addEventListener('click', (e) => {
+      if (!showDownloadOptionsButton.contains(e.target) && !downloadOptionsContainer.contains(e.target) && downloadOptionsContainer.classList.contains('flex')) {
+        hideDownloadOptions();
+      }
     });
   </script>
 

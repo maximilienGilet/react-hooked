@@ -12,9 +12,9 @@ const {code, lang, class: className} = Astro.props;
 
 ---
 
-<div class="relative">
+<div class="relative ctp-frappe">
   <Code code={code} lang={lang ?? "ts"} theme="catppuccin-frappe" class={className} />
-  <button title="Copy" data-copy="action" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 z-20 text-zinc-50 hover:bg-white/10 hover:text-zinc-50 [&amp;_svg]:size-3 absolute right-2 top-2 p-3">
+  <button title="Copy" data-copy="action" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 z-20 text-zinc-50 bg-ctp-base/90 hover:bg-ctp-surface0 hover:text-zinc-50 [&amp;_svg]:size-3 absolute right-2 top-2 p-3">
     <span class="sr-only">Copy</span>
     <svg data-copy="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" class="fill-current w-4 h-4">
       <rect width="256" height="256" fill="none"/>
