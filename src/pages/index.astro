@@ -1,16 +1,43 @@
 ---
+import HookIcon from "../components/icons/HookIcon.astro";
+import LandingLayout from "../layouts/LandingLayout.astro";
+import Carousel from "../components/Carousel.astro";
+import { getHooksNames } from "../utils/hooks";
+import { chunk } from "../utils/array";
 
+
+const hookNames = getHooksNames();
+
+const chunks = chunk(hookNames, 8);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body class="dark:mocha latte bg-base text-text antialiased">
-		<h1>Astro</h1>
-	</body>
-</html>
+<LandingLayout title="React Hooked 🪝" selectedPage="Home">
+  <section class=" min-h-screen mx-auto flex py-24 md:flex-row flex-col items-center md:justify-center flex-wrap">
+    <div class="  md:max-w-lg  flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center self-start mt-32">
+      <h1 class="font-bold sm:text-5xl text-3xl mb-4">React Hooked 
+          <HookIcon class="inline-block w-10 h-10 mb-2" />
+      </h1>
+      <p class="mb-4 text-xl font-semibold">
+        React hooks, without package installation.
+      </p>
+      <p class="mb-6 text-lg">
+        A collection of React Hooks without dependencies. Steal these hooks and use them in your project.
+      </p>
+      <a href="/docs" class="inline-flex text-ctp-base bg-ctp-blue border-0 py-4 px-8 focus:outline-none hover:bg-ctp-pink rounded text-xl transition-all">Getting started</a>
+    </div>
+    <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 sticky top-16 self-start">
+        <HookIcon />
+    </div>
+    <div class="wave h-24 w-screen bg-ctp-blue/80 backdrop-blur-sm z-10">
+plop
+    </div>
+    <div class="flex-grow bg-gradient-to-b from-ctp-blue/80 to-ctp-base backdrop-blur-sm min-h-[20rem] py-8 w-full z-10">
+      {chunks[0] && <Carousel items={chunks[0]} from="left" />}
+      {chunks[1] && <Carousel items={chunks[1]} class="mt-8" from="right" />}
+      {chunks[2] && <Carousel items={chunks[2]} class="mt-8" from="left" />}
+    </div>
+  </section>
+  <div class="flex justify-center mb-48">
+    <a href="/docs" class="inline-flex text-ctp-base bg-ctp-blue border-0 py-4 px-8 focus:outline-none hover:bg-ctp-pink rounded text-xl transition-all">Getting started</a>
+  </div>
+</LandingLayout>
