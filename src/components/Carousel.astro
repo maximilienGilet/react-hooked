@@ -14,7 +14,7 @@ const directionClass = from === 'left' ? 'animate-slide-in-from-left' : 'animate
 <div 
   class={
     cn(
-      "flex flex-col gap-6 lg:flex-row justify-evenly lg:gap-6 supports-no-scroll-driven-animations:animate-none [animation-range:0%_70%] [animation-timeline:scroll()]", 
+      "flex gap-6 flex-row justify-evenly lg:gap-6 supports-no-scroll-driven-animations:animate-none overflow-x-hidden [animation-range:0%_70%] [animation-timeline:scroll()]", 
       directionClass,
       className
     )
