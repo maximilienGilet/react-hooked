@@ -21,6 +21,10 @@ code .line::before {
   color: rgba(115, 138, 148, 0.4);
 }
 
+details summary::-webkit-details-marker {
+  display: none;
+}
+
 .wave {
   clip-path: polygon(
     100% 100%,
