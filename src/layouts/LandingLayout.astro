@@ -2,6 +2,7 @@
 ---
 import { ViewTransitions } from 'astro:transitions';
 import MainNav from '../components/nav/MainNav.astro';
+import GithubIcon from '../components/icons/GithubIcon.astro';
 
 interface Props {
   title: string;
@@ -30,7 +31,10 @@ interface Props {
     <!-- <Footer /> -->
     <footer class="bg-ctp-base text-ctp-text">
       <div class="container mx-auto px-6 py-8">
-        <div class="flex lg:flex-row  justify-center">
+        <div class="flex flex-col items-center justify-center gap-8">
+          <a class="text-sm/6 font-medium hover:underline" href="https://github.com/maximilienGilet/react-hooked" target="_blank" aria-label="Github" title="Github">
+            <GithubIcon class="w-6 h-6" />
+          </a>
           <div>
             Made with ❤️ by <a href="https://mgilet.xyz" target="_blank" class="text-ctp-blue hover:underline">Maximilien Gilet</a>
           </div>
