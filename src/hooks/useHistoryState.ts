@@ -22,10 +22,7 @@ export type UseHistoryState<T = unknown> = (
  * @param {number} size - max size of history
  * @returns {UseHistoryState<T>} state, setState, and history
  */
-function useHistoryState<T>(
-  initialState: T | (() => T),
-  size = 20,
-): UseHistoryState<T> {
+function useHistoryState<T>(initialState: T | (() => T), size = 20) {
   const [state, setState] = useState<T>(initialState);
   const [_, forceUpdate] = useState(0);
   const stateRef = useRef<T>(state);

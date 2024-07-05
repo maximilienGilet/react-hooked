@@ -28,7 +28,7 @@ const { items, selectedPage } = Astro.props;
   function setupSelect() {
     const select = document.getElementById("mobile-select");
     if (select) {
-      select.addEventListener("change", (e) => {
+      select.addEventListener("change", (e: any) => {
         window.location.href = e.target!.value;
       });
     }

@@ -42,7 +42,7 @@ import SunIcon from "../icons/SunIcon.astro";
       document.documentElement.classList.add("dark");
     }
 
-    window.localStorage.setItem("theme", theme);
+    window.localStorage.setItem("theme", theme ?? "light");
 
     const handleToggleClick = () => {
       const element = document.documentElement;
@@ -52,19 +52,21 @@ import SunIcon from "../icons/SunIcon.astro";
       localStorage.setItem("theme", isDark ? "dark" : "light");
     };
 
-    document
-      .getElementById("themeToggle")
-      .addEventListener("click", handleToggleClick);
+    const themeToggle = document.getElementById("themeToggle");
 
+    if (themeToggle) {
+      themeToggle.addEventListener("click", handleToggleClick);
+    }
 
     document.addEventListener("astro:after-swap", () => {
       if (localStorage.getItem("theme") === "dark")
         document.documentElement.classList.toggle("dark", true);
 
-      if (!document.getElementById("themeToggle").hasAttribute("onclick"))
-        document
-          .getElementById("themeToggle")
-          .addEventListener("click", handleToggleClick);
+      const themeToggle = document.getElementById("themeToggle");
+
+      if (themeToggle) {
+        themeToggle.addEventListener("click", handleToggleClick);
+      }
     });
 
   </script>
