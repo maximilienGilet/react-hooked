@@ -24,7 +24,7 @@ const { title, selectedPage } = Astro.props;
   </head>
   <body class="dark:ctp-mocha ctp-latte bg-ctp-base text-ctp-text antialiased">
     <div class="">
-      <div class="sticky top-0 z-10 border-b border-zinc-950/10 bg-ctp-mantle px-6 py-5 sm:px-8 lg:z-10 lg:flex lg:h-16 lg:items-center lg:py-0">
+      <div class="sticky top-0 border-b border-zinc-950/10 bg-ctp-mantle px-6 py-5 sm:px-8 z-50 lg:flex lg:h-16 lg:items-center lg:py-0">
         <MainNav />
         <MobileNavbar items={hookNames} selectedPage={selectedPage} />
       </div>
