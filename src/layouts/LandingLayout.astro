@@ -3,6 +3,7 @@
 import { ViewTransitions } from 'astro:transitions';
 import MainNav from '../components/nav/MainNav.astro';
 import GithubIcon from '../components/icons/GithubIcon.astro';
+import { GITHUB_REPO_URL } from '../utils/constants';
 
 interface Props {
   title: string;
@@ -32,7 +33,7 @@ interface Props {
     <footer class="bg-ctp-base text-ctp-text">
       <div class="container mx-auto px-6 py-8">
         <div class="flex flex-col items-center justify-center gap-8">
-          <a class="text-sm/6 font-medium hover:underline" href="https://github.com/maximilienGilet/react-hooked" target="_blank" aria-label="Github" title="Github">
+          <a class="text-sm/6 font-medium hover:underline" href={GITHUB_REPO_URL} target="_blank" aria-label="Github" title="Github">
             <GithubIcon class="w-6 h-6" />
           </a>
           <div>

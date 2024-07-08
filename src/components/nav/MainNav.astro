@@ -3,6 +3,7 @@ import HookIcon from "../icons/HookIcon.astro";
 import MoonIcon from "../icons/MoonIcon.astro";
 import SunIcon from "../icons/SunIcon.astro";
 import GithubIcon from "../icons/GithubIcon.astro";
+import { GITHUB_REPO_URL } from "../../utils/constants";
 ---
 
 <div class="mx-auto flex w-full max-w-xl items-center justify-between lg:max-w-7xl gap-4 flex-wrap">
@@ -19,7 +20,7 @@ import GithubIcon from "../icons/GithubIcon.astro";
     <a class="text-sm/6 font-medium hover:underline" href="/docs">Docs</a>
   </div>
   <div class="flex items-center gap-4 sm:gap-8 ml-auto">
-    <a class="text-sm/6 font-medium hover:underline" href="https://github.com/maximilienGilet/react-hooked" target="_blank" aria-label="Github" title="Github">
+    <a class="text-sm/6 font-medium hover:underline" href={GITHUB_REPO_URL} target="_blank" aria-label="Github" title="Github">
       <GithubIcon class="w-6 h-6" />
     </a>
     <button id="themeToggle" class="text-sm/6 font-medium" aria-label="Toggle theme" title="Toggle theme">

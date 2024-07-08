@@ -1,6 +1,7 @@
 ---
 import Collapsible from '../../components/Collapsible.astro';
 import DocsLayout from '../../layouts/DocsLayout.astro';
+import { GITHUB_REPO_URL } from '../../utils/constants';
 ---
 
 <DocsLayout title="Getting started" selectedPage="docs">
@@ -44,7 +45,7 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
         How can I contribute?
       </div>
       <p>
-        You can contribute by opening an issue or a pull request on the <a href="https://github.com/react-hooked/react-hooked" target="_blank" rel="noopener noreferrer" class="text-ctp-blue hover:underline">GitHub repository</a>.
+        You can contribute by opening an issue or a pull request on the <a href={GITHUB_REPO_URL} target="_blank" rel="noopener noreferrer" class="text-ctp-blue hover:underline">GitHub repository</a>.
       </p>
     </Collapsible>
   </article>
