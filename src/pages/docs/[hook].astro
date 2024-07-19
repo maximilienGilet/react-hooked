@@ -6,21 +6,25 @@ import DownloadCommand from '../../components/DownloadCommand.astro';
 import { extractHookName } from '../../utils/hooks';
 import jsDoc2JSON from '../../utils/jsdoc2json.ts';
 import CodeBox from '../../components/CodeBox.astro';
+import Example from '../../components/Example.tsx';
+import { capitalize } from '../../utils/strings';
 
 export async function getStaticPaths() {
   const hooks: Record<string, string> = import.meta.glob('/src/hooks/*.ts', {query: '?raw', eager: true, import: 'default'});
+  const examples: Record<string, string> = import.meta.glob('/src/examples/*.tsx', {query: '?raw', eager: true, import: 'default'});
   return Object.keys(hooks).map((hook) => {
     const hookName = extractHookName(hook);
     const doc = jsDoc2JSON(hooks[hook]);
+    const example = examples[`/src/examples/${capitalize(hookName)}Example.tsx`];
     return {
       params: { hook: hookName },
-      props: { hook: hooks[hook], hookName, doc },
+      props: { hook: hooks[hook], hookName, doc, example },
     }
   });
 
 }
 
-const {hookName, hook, doc } = Astro.props;
+const {hookName, hook, doc, example } = Astro.props;
 
 const requiredPackages = doc.tags.filter((el) => el.tag === "requires" && el.type === "package");
 const requiredLocals = doc.tags.filter((el) => el.tag === "requires" && el.type === "local");
@@ -97,7 +101,38 @@ const requiredLocals = doc.tags.filter((el) => el.tag === "requires" && el.type 
     </div>
     </AlertBox>
 )}
+
+  {example && (
+    <section class="mt-12">
+      <h2 class="text-2xl mb-4">Example</h2>
+      <div class="flex flex-row flex-wrap ctp-frappe">
+        <input id="tab-demo" type="radio" name="demo-tabs" class="peer/tab-demo opacity-0 absolute" checked />
+        <label for="tab-demo" class="peer-checked/tab-demo:bg-ctp-base bg-ctp-surface1 text-ctp-text cursor-pointer p-2 px-4 rounded-t-lg flex flex-row items-stretch gap-2">
+          Demo
+        </label>
+
+        <input id="tab-code" type="radio" name="demo-tabs" class="peer/tab-code opacity-0 absolute" />
+        <label for="tab-code" class="peer-checked/tab-code:bg-ctp-base bg-ctp-surface1 text-ctp-text cursor-pointer p-2 px-4 rounded-t-lg flex flex-row items-stretch gap-2">
+          Code
+        </label>
+
+        <div class="basis-full h-0"></div>
+
+        <div class="hidden peer-checked/tab-demo:block w-full">
+          <Example name={hookName} client:idle className="rounded-xl shadow-xl rounded-tl-none " />
+        </div>
+        <div class="hidden peer-checked/tab-code:block w-full">
+          <CodeBox code={example.trim()} lang="tsx" class="rounded-xl shadow-xl rounded-tl-none" />
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="mt-12">
+  <h2 class="text-2xl mb-4">Code</h2>
+
   <CodeBox code={hook.trim()} lang="ts" class="rounded-xl shadow-xl" />
+  </section>
 
 <script define:vars={{ hookName, hook }}>
   // Download button
