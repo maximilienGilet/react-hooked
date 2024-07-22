@@ -1,6 +1,9 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useState } from "react";
 
 type UseHashReturn = [string, (newHash: string) => void];
+
+const useIsomorphicLayoutEffect =
+  typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 /**
  * Hook to read and write the hash of the current url. It also updates the hash when the url changes.
@@ -15,7 +18,7 @@ export default function useHash(): UseHashReturn {
     setHash(window.location.hash);
   }, []);
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     window.addEventListener("hashchange", onHashChange);
     return () => {
       window.removeEventListener("hashchange", onHashChange);
