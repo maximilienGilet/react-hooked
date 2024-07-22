@@ -118,7 +118,7 @@ const requiredLocals = doc.tags.filter((el) => el.tag === "requires" && el.type 
         <div class="basis-full h-0"></div>
 
         <div class="hidden peer-checked/tab-demo:block w-full">
-          <Example name={hookName} client:idle className="rounded-xl shadow-xl rounded-tl-none" />
+          <Example name={hookName} client:only className="rounded-xl shadow-xl rounded-tl-none" />
         </div>
         <div class="hidden peer-checked/tab-code:block w-full">
           <CodeBox code={example.trim()} lang="tsx" class="rounded-xl shadow-xl rounded-tl-none" />
@@ -133,7 +133,7 @@ const requiredLocals = doc.tags.filter((el) => el.tag === "requires" && el.type 
   <CodeBox code={hook.trim()} lang="ts" class="rounded-xl shadow-xl" />
   </section>
 
-<script define:vars={{ hookName, hook }}>
+<script is:inline define:vars={{ hookName, hook }}>
   // Download button
   const downloadButtons = document.querySelectorAll('[data-action="download"]');
   downloadButtons.forEach(downloadButton => {
