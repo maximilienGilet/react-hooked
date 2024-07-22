@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "@catppuccin/tailwindcss": "^0.1.6",
-    "@types/js-cookie": "^3.0.6"
+    "@types/js-cookie": "^3.0.6",
+    "@types/node": "^20.14.11"
   }
 }
