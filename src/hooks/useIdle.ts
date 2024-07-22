@@ -14,55 +14,65 @@ function throttle(
   };
 }
 
+const defaultEvents = [
+  "mousemove",
+  "mousedown",
+  "resize",
+  "keydown",
+  "touchstart",
+  "wheel",
+];
+const oneMinute = 60e3;
+
 /**
  * React hook that tracks idle state
  * @param {number} ms - time in milliseconds
  * @returns {boolean} idle state
  */
-export function useIdle(ms = 1000 * 60): boolean {
-  const [idle, setIdle] = useState(false);
+export default function useIdle(
+  ms: number = oneMinute,
+  initialState: boolean = false,
+  events: string[] = defaultEvents,
+): boolean {
+  const [state, setState] = useState<boolean>(initialState);
 
   useEffect(() => {
-    let timeoutId: number;
-
-    const handleTimeout = () => {
-      setIdle(true);
-    };
-
-    const handleEvent = throttle(() => {
-      setIdle(false);
-
-      window.clearTimeout(timeoutId);
-      timeoutId = window.setTimeout(handleTimeout, ms);
-    }, 500);
-
-    const handleVisibilityChange = () => {
-      if (!document.hidden) {
-        handleEvent();
+    let mounted = true;
+    let timeout: any;
+    let localState: boolean = state;
+    const set = (newState: boolean) => {
+      if (mounted) {
+        localState = newState;
+        setState(newState);
       }
     };
 
-    timeoutId = window.setTimeout(handleTimeout, ms);
+    const onEvent = throttle(() => {
+      if (localState) {
+        set(false);
+      }
 
-    window.addEventListener("mousemove", handleEvent);
-    window.addEventListener("mousedown", handleEvent);
-    window.addEventListener("resize", handleEvent);
-    window.addEventListener("keydown", handleEvent);
-    window.addEventListener("touchstart", handleEvent);
-    window.addEventListener("wheel", handleEvent);
-    document.addEventListener("visibilitychange", handleVisibilityChange);
+      clearTimeout(timeout);
+      timeout = setTimeout(() => set(true), ms);
+    }, 50);
+    const onVisibility = () => {
+      if (!document.hidden) {
+        onEvent();
+      }
+    };
+
+    events.map((event) => window.addEventListener(event, onEvent));
+    document.addEventListener("visibilitychange", onVisibility);
+
+    timeout = setTimeout(() => set(true), ms);
 
     return () => {
-      window.removeEventListener("mousemove", handleEvent);
-      window.removeEventListener("mousedown", handleEvent);
-      window.removeEventListener("resize", handleEvent);
-      window.removeEventListener("keydown", handleEvent);
-      window.removeEventListener("touchstart", handleEvent);
-      window.removeEventListener("wheel", handleEvent);
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-      window.clearTimeout(timeoutId);
-    };
-  }, [ms]);
+      mounted = false;
 
-  return idle;
+      events.map((event) => window.removeEventListener(event, onEvent));
+      document.removeEventListener("visibilitychange", onVisibility);
+    };
+  }, [ms, events]);
+
+  return state;
 }

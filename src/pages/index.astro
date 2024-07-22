@@ -31,8 +31,6 @@ const chunks = chunk(hookNames, 8);
     <div class="lg:max-w-lg  w-1/2 md:w-1/3 lg:w-1/4 mx-auto sticky top-16 self-start">
         <HookIcon />
     </div>
-    <div class="wave h-24 w-screen bg-ctp-blue/80 backdrop-blur-sm z-10">
-    </div>
     <div class="flex-grow bg-gradient-to-b from-ctp-blue/80 to-ctp-base backdrop-blur-sm min-h-[20rem] py-8 w-full z-10 overflow-x-clip">
       {chunks[0] && <Carousel items={chunks[0]} from="left" />}
       {chunks[1] && <Carousel items={chunks[1]} class="mt-8" from="right" />}

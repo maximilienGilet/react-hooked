@@ -6,7 +6,7 @@ export default function UseBooleanExample() {
 
   return (
     <div>
-      <div>
+      <div className="text-ctp-text">
         The value is &nbsp;
         <span
           className={clsx(

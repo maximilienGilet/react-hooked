@@ -1,42 +1,36 @@
-import * as React from "react";
+import { useEffect, useState, type RefObject } from "react";
 
-const { useState } = React;
-
-const noop = () => {};
-
-export type Element =
-  | ((state: boolean) => React.ReactElement<any>)
-  | React.ReactElement<any>;
-
-type UseHoverReturn = [React.ReactElement<any>, boolean];
-
-/**
- * React hook to handle hover state
- * @param {Element} element
- * @returns {UseHoverReturn} [element, hover state]
- */
-const useHover = (element: Element): UseHoverReturn => {
-  const [state, setState] = useState(false);
-
-  const onMouseEnter = (originalOnMouseEnter?: any) => (event: any) => {
-    (originalOnMouseEnter || noop)(event);
-    setState(true);
-  };
-  const onMouseLeave = (originalOnMouseLeave?: any) => (event: any) => {
-    (originalOnMouseLeave || noop)(event);
-    setState(false);
-  };
-
-  if (typeof element === "function") {
-    element = element(state);
+export default function useHover(
+  ref: RefObject<Element>,
+  enabled: boolean = true,
+): boolean {
+  if (process.env.NODE_ENV === "development") {
+    if (typeof ref !== "object" || typeof ref.current === "undefined") {
+      console.error("useHover expects a single ref argument.");
+    }
   }
 
-  const el = React.cloneElement(element, {
-    onMouseEnter: onMouseEnter(element.props.onMouseEnter),
-    onMouseLeave: onMouseLeave(element.props.onMouseLeave),
-  });
+  const [value, setValue] = useState(false);
 
-  return [el, state];
-};
+  useEffect(() => {
+    const onMouseOver = () => setValue(true);
+    const onMouseOut = () => setValue(false);
 
-export default useHover;
+    if (enabled && ref && ref.current) {
+      ref.current.addEventListener("mouseover", onMouseOver);
+      ref.current.addEventListener("mouseout", onMouseOut);
+    }
+
+    // fixes react-hooks/exhaustive-deps warning about stale ref elements
+    const { current } = ref;
+
+    return () => {
+      if (enabled && current) {
+        current.removeEventListener("mouseover", onMouseOver);
+        current.removeEventListener("mouseout", onMouseOut);
+      }
+    };
+  }, [enabled, ref]);
+
+  return value;
+}

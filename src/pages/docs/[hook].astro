@@ -8,6 +8,7 @@ import jsDoc2JSON from '../../utils/jsdoc2json.ts';
 import CodeBox from '../../components/CodeBox.astro';
 import Example from '../../components/Example.tsx';
 import { capitalize } from '../../utils/strings';
+import ExpandIcon from '../../components/icons/ExpandIcon.astro';
 
 export async function getStaticPaths() {
   const hooks: Record<string, string> = import.meta.glob('/src/hooks/*.ts', {query: '?raw', eager: true, import: 'default'});
@@ -34,9 +35,7 @@ const requiredLocals = doc.tags.filter((el) => el.tag === "requires" && el.type 
     <h1 class="text-3xl">{hookName}</h1>
     <button data-action="showDownloadOptions" class="bg-ctp-blue hover:bg-ctp-pink text-ctp-base py-2 px-4 rounded-lg inline-flex items-center transition-all shadow hover:shadow-lg ml-auto">
       <span>Get this hook</span>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" class="h-6 w-6 fill-current ml-2">
-        <polyline points="96 104 128 72 160 104" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
-        <polyline points="160 152 128 184 96 152" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
+      <ExpandIcon class="h-6 w-6 fill-current ml-2" />
     </button>
     <div data-container="downloadOptions" class="absolute top-11 right-0 hidden flex-col items-stretch justify-stretch bg-ctp-surface1 w-full lg:w-[500px] p-4 rounded-lg z-30 shadow-lg">
       <div class="pb-4 mb-2 border-b-ctp-surface2 border-b">
@@ -119,7 +118,7 @@ const requiredLocals = doc.tags.filter((el) => el.tag === "requires" && el.type 
         <div class="basis-full h-0"></div>
 
         <div class="hidden peer-checked/tab-demo:block w-full">
-          <Example name={hookName} client:idle className="rounded-xl shadow-xl rounded-tl-none " />
+          <Example name={hookName} client:idle client:only className="rounded-xl shadow-xl rounded-tl-none" />
         </div>
         <div class="hidden peer-checked/tab-code:block w-full">
           <CodeBox code={example.trim()} lang="tsx" class="rounded-xl shadow-xl rounded-tl-none" />

@@ -8,7 +8,7 @@ type UseHashReturn = [string, (newHash: string) => void];
  * 1. The current hash of the url.
  * 2. A function to set the hash of the url.
  */
-export const useHash = (): UseHashReturn => {
+export default function useHash(): UseHashReturn {
   const [hash, setHash] = useState(() => window.location.hash);
 
   const onHashChange = useCallback(() => {
@@ -32,4 +32,4 @@ export const useHash = (): UseHashReturn => {
   );
 
   return [hash, _setHash] as const;
-};
+}
