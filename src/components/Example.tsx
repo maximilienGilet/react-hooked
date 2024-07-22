@@ -20,7 +20,7 @@ export interface ExampleProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export default function Example({ name, className }: ExampleProps) {
   const ExampleComponent = lazy(
-    () => import(`../examples/${capitalize(name)}Example`),
+    () => import(`../examples/${capitalize(name)}Example.tsx`),
   );
   return (
     <div className="ctp-frappe">
