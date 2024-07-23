@@ -20,7 +20,7 @@ const getVisibilityChangeServerSnapshot = () => {
  * A hook that tracks whether the document is visible or not
  * @returns {boolean} true if document is visible, false otherwise
  */
-export function useVisibilityChange(): boolean {
+export default function useVisibilityChange(): boolean {
   const visibilityState = useSyncExternalStore(
     useVisibilityChangeSubscribe,
     getVisibilityChangeSnapshot,
