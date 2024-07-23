@@ -1,5 +1,4 @@
 import { useRef, useState } from "react";
-import useClickAway from "../hooks/useClickAway";
 import usePrevious from "../hooks/usePrevious";
 
 export default function UsePreviousExample() {
