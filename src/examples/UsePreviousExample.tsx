@@ -6,10 +6,6 @@ export default function UsePreviousExample() {
   const [input, setInput] = useState("");
   const previousInput = usePrevious(input);
 
-  const handleClick = () => {
-    setInput(input + 1);
-  };
-
   return (
     <div className="text-ctp-text">
       <input
