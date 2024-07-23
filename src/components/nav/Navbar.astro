@@ -10,7 +10,7 @@ interface Props {
 const { items, selectedPage } = Astro.props;
 ---
 
-<nav id="nav-list" class="sticky top-16 hidden max-h-[calc(100dvh-theme(spacing.16))] w-48 shrink-0 overflow-y-auto pb-16 pt-12 lg:block">
+<nav id="nav-list" class="sticky top-16 hidden max-h-[calc(100dvh-theme(spacing.16))] w-52 shrink-0 overflow-y-auto pb-16 pt-12 lg:block">
   <ul role="list">
     <li>
       <a class={ cn( "flex items-center gap-x-3 py-1.5  font-medium hover:underline", selectedPage === "docs" && "text-ctp-blue" ) } href="/docs">Getting started</a>

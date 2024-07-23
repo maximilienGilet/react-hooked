@@ -31,6 +31,9 @@ export default {
       supports: {
         "no-scroll-driven-animations": "not(animation-timeline: scroll())",
       },
+      fontFamily: {
+        handwriting: ['"Permanent Marker", cursive'],
+      },
     },
   },
   plugins: [
