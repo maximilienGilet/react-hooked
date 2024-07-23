@@ -1,7 +1,7 @@
 import useVisibilityChange from "../hooks/useVisibilityChange";
 import { useEffect, useState } from "react";
 
-export default function UseCopyToClipboardExample() {
+export default function UseVisibilityChangeExample() {
   const isDocumentVisible = useVisibilityChange();
   const [tabAwayCount, setTabAwayCount] = useState(0);
 
