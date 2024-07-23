@@ -2,7 +2,7 @@ import { type RefObject, useEffect, useRef, useState } from "react";
 
 /**
  * @description A hook that checks if the text content of an element is truncated or not.
- * @param ref  A reference to the element to check if its text is truncated.
+ * @param {RefObject<HTMLElement>} ref A reference to the element to check if its text is truncated.
  * @returns {boolean} A boolean indicating if the text is truncated or not.
  */
 export default function useIsTextTruncated(ref: RefObject<HTMLElement>) {
