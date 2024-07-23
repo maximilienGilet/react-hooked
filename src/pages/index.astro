@@ -9,16 +9,18 @@ const hooksCount = Object.keys(hooks).length;
 <LandingLayout title="React Hooked 🪝" selectedPage="Home">
   <section class=" min-h-screen mx-auto flex py-24 lg:flex-row flex-col items-center md:justify-center flex-wrap">
     <div class="mx-auto max-w-md  md:max-w-lg  flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center self-start px-4 sm:mt-32 md:mt-0 xl:mt-12">
-      <div class="border-2 border-ctp-peach mb-4 px-4 py-1 rounded-full text-ctp-peach pointer-events-none">
-        Beta
-      </div>
-      <h1 class="font-bold sm:text-5xl text-3xl mb-4">
-        React hooks, without package installation.
-      </h1>
+      <div class="flex flex-row items-center justify-center gap-4">
       <p class="mb-4 text-xl font-semibold">
         React Hooked
         <HookIcon class="inline-block w-6 h-6 mb-2" />
       </p>
+      <div class="border-2 border-ctp-peach mb-4 px-4 py-1 rounded-full text-ctp-peach pointer-events-none">
+        Beta
+      </div>
+      </div>
+      <h1 class="font-bold sm:text-5xl text-3xl mb-4">
+        React hooks, without package installation.
+      </h1>
       <p class="mb-6 text-lg">
         A collection of React Hooks without dependencies. Steal these hooks and use them in your project.
       </p>
@@ -29,11 +31,11 @@ const hooksCount = Object.keys(hooks).length;
     </div>
     <div class="flex-grow min-h-[20rem] py-8 w-full px-2 z-10 overflow-x-clip">
       <div class="flex flex-col items-center justify-center">
-        <blockquote class="text-xl italic bg-ctp-base/90 backdrop-blur-sm font-semibold text-ctp-lavender mb-12 p-8 border border-ctp-subtext0 rounded-lg">
+        <blockquote class="text-xl italic bg-ctp-crust/90 backdrop-blur-sm font-semibold mb-12 p-8 border border-ctp-subtext0 rounded-lg">
         <svg class="w-8 h-8 text-ctp-subtext0 mb-2 -ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 14">
             <path d="M6 0H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3H2a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Zm10 0h-4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3h-1a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Z"/>
         </svg>
-          <p>It's like shadcn/ui, but for hooks</p>
+          <p class="text-3xl">It's like shadcn/ui, but for hooks</p>
         </blockquote>
       </div>
       <div class="max-w-7xl mx-auto my-10 px-4">
