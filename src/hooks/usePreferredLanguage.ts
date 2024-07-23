@@ -13,6 +13,10 @@ const getPreferredLanguageServerSnapshot = () => {
   throw Error("usePreferredLanguage is a client-only hook");
 };
 
+/**
+ * React hook to get the user's preferred language
+ * @returns {string} The user's preferred language
+ */
 export default function usePreferredLanguage() {
   return useSyncExternalStore(
     usePreferredLanguageSubscribe,
