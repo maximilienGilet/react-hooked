@@ -1,47 +1,57 @@
-# Astro Starter Kit: Minimal
+# React Hooked 🪝
+
+React hooks, without package installation.
+
+> It's like shadcn/ui but for hooks !
+
+## Why?
+
+The idea of adding dependencies in my projects to use 2 or 3 React hooks bothered me. Why should I add another dependency ? Just for one or two hooks ? No way !
+
+Here comes React Hooked : React hooks, without package installation.
+
+Simple as that.
+
+- No package installation
+- 100% Typescript
+- JSDoc
+- Examples
+- Just copy paste hooks in your code or use curl/wget
+
+Why bother with an extra dependency when you can just grab the hooks you need ?
+
+## CLI Usage
+
+For now, you can grab the hooks you need from the website or use curl/wget provided in the examples.
+
+A CLI will be available soon.
+
+## How to contribute ?
+
+You can contribute by adding new hooks or by fixing bugs.
+
+1. Fork the repo
+2. Create a new branch
+3. Add your hook in the `src/hooks` folder - JSDoc must be added with the correct types
+4. Add an example in the `examples` folder - The example file must be named `Use{HookName}Example.tsx`
+5. Create a pull request
+
+### Best practices
+
+- Use the same name for the hook and the file
+- Use `export default function` for the hook
+- Try out the example in the browser
+- Avoid requiring dependencies
+
+### Running locally
 
 ```sh
-npm create astro@latest -- --template minimal
+npm install
+npm run dev
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+Then open `http://localhost:4321` in your browser.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## License
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+MIT
