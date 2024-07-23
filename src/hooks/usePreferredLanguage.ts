@@ -1,8 +1,6 @@
 import { useSyncExternalStore } from "react";
 
-const usePreferredLanguageSubscribe = (
-  callback: (this: Window, event: Event) => any,
-) => {
+const usePreferredLanguageSubscribe = (callback: (event: Event) => void) => {
   window.addEventListener("languagechange", callback);
   return () => window.removeEventListener("languagechange", callback);
 };
