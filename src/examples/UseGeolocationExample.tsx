@@ -1,4 +1,4 @@
-import useGeolocation from "../hooks/useGeolocation";
+import useGeolocation from "@/hooks/useGeolocation";
 
 export default function UseGeolocationExample() {
   const {
@@ -21,7 +21,7 @@ export default function UseGeolocationExample() {
   return (
     <div className="flex flex-col items-center justify-center gap-4 p-4 text-ctp-text">
       <p>The geolocation is {loading ? "loading" : "loaded"}.</p>
-      <table className="table-auto border-collapse w-full p-2">
+      <table className="w-full table-auto border-collapse p-2">
         <thead>
           <tr>
             <th>Property</th>

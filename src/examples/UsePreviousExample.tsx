@@ -1,5 +1,5 @@
-import { useRef, useState } from "react";
-import usePrevious from "../hooks/usePrevious";
+import { useState } from "react";
+import usePrevious from "@/hooks/usePrevious";
 
 export default function UsePreviousExample() {
   const [input, setInput] = useState("");
@@ -11,7 +11,7 @@ export default function UsePreviousExample() {
         type="text"
         value={input}
         placeholder="Type something..."
-        className="bg-ctp-surface1 p-2 rounded"
+        className="rounded bg-ctp-surface1 p-2"
         onChange={(event) => {
           setInput(event.target.value);
         }}

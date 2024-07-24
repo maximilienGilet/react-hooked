@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useEventListener from "../hooks/useEventListener";
+import useEventListener from "@/hooks/useEventListener";
 
 export default function UseEventListenerExample() {
   const [keydownCount, setKeydownCount] = useState(0);

@@ -1,27 +1,35 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
-import { cn } from '../utils/cn';
-interface Props extends HTMLAttributes<'section'> {
-  from?: 'left' | 'right';
+import type { HTMLAttributes } from "astro/types";
+import { cn } from "@/utils/cn";
+interface Props extends HTMLAttributes<"section"> {
+  from?: "left" | "right";
   items: string[];
 }
 
 const { items, class: className, from, ...props } = Astro.props;
 
-const directionClass = from === 'left' ? 'animate-slide-in-from-left' : 'animate-slide-in-from-right';
+const directionClass =
+  from === "left"
+    ? "animate-slide-in-from-left"
+    : "animate-slide-in-from-right";
 ---
 
-<div 
-  class={
-    cn(
-      "flex gap-6 flex-row justify-evenly lg:gap-6 supports-no-scroll-driven-animations:animate-none overflow-x-hidden [animation-range:0%_70%] [animation-timeline:scroll()]", 
-      directionClass,
-      className
-    )
-  }
+<div
+  class={cn(
+    "flex gap-6 flex-row justify-evenly lg:gap-6 supports-no-scroll-driven-animations:animate-none overflow-x-hidden [animation-range:0%_70%] [animation-timeline:scroll()]",
+    directionClass,
+    className,
+  )}
   {...props}
 >
-  {items.map((item) => (
-    <a href={`/docs/${item}`} class="border-2 border-transparent border-ctp-base p-4 bg-ctp-base rounded-lg shadow hover:bg-ctp-pink hover:text-ctp-base transition-all">{item}</a>
-  ))}
+  {
+    items.map((item) => (
+      <a
+        href={`/docs/${item}`}
+        class="rounded-lg border-2 border-ctp-base border-transparent bg-ctp-base p-4 shadow transition-all hover:bg-ctp-pink hover:text-ctp-base"
+      >
+        {item}
+      </a>
+    ))
+  }
 </div>

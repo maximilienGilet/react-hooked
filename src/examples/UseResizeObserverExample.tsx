@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import useResizeObserver from "../hooks/useResizeObserver";
+import useResizeObserver from "@/hooks/useResizeObserver";
 
 export default function UseResizeObserverExample() {
   const ref = useRef<HTMLTextAreaElement>(null);
@@ -10,12 +10,12 @@ export default function UseResizeObserverExample() {
   });
 
   return (
-    <div className="flex flex-col items-center gap-4 text-ctp-text resize border border-ctp-base">
+    <div className="flex resize flex-col items-center gap-4 border border-ctp-base text-ctp-text">
       <p>Width: {width}</p>
       <p>Height: {height}</p>
       <textarea
         ref={ref}
-        className="bg-ctp-surface1 p-2 rounded resize"
+        className="resize rounded bg-ctp-surface1 p-2"
         rows={10}
         cols={50}
         defaultValue="Resize me!"

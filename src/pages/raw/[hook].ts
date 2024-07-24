@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 
-import { extractHookFileName } from "../../utils/hooks";
+import { extractHookFileName } from "@/utils/hooks";
 
 export const GET: APIRoute = ({ params }) => {
   const hookName = params.hook;

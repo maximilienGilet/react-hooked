@@ -1,5 +1,5 @@
 ---
-import { cn } from "../../utils/cn";
+import { cn } from "@/utils/cn";
 interface Props {
   href: string;
   text: string;
@@ -11,10 +11,21 @@ const { href, text, isNew, isSelected } = Astro.props;
 const selectedClasses = "text-ctp-blue hover:text-ctp-blue-600";
 ---
 
-
 <li>
-<a class={ cn("relative flex gap-2 font-medium hover:underline mb-2", isSelected && selectedClasses)} href={href}>
+  <a
+    class={cn(
+      "relative flex gap-2 font-medium hover:underline mb-2",
+      isSelected && selectedClasses,
+    )}
+    href={href}
+  >
     {text}
-    {isNew && <span class="whitespace-nowrap rounded-lg bg-lime-400/20 px-2 text-xs/6 font-semibold text-lime-700 ">New</span>}
+    {
+      isNew && (
+        <span class="whitespace-nowrap rounded-lg bg-lime-400/20 px-2 text-xs/6 font-semibold text-lime-700">
+          New
+        </span>
+      )
+    }
   </a>
 </li>

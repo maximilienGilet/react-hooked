@@ -1,50 +1,62 @@
-
 ---
-import { ViewTransitions } from 'astro:transitions';
-import MainNav from '../components/nav/MainNav.astro';
-import GithubIcon from '../components/icons/GithubIcon.astro';
-import { GITHUB_REPO_URL } from '../utils/constants';
+import { ViewTransitions } from "astro:transitions";
+import MainNav from "@/components/nav/MainNav.astro";
+import GithubIcon from "@/components/icons/GithubIcon.astro";
+import { GITHUB_REPO_URL } from "@/utils/constants";
 
 interface Props {
   title: string;
   selectedPage: string;
 }
-
 ---
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="stylesheet" href="/style.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap"
+      rel="stylesheet"
+    />
     <title>React Hooked 🪝</title>
     <ViewTransitions />
   </head>
-  <body class="dark:ctp-mocha ctp-latte bg-ctp-base text-ctp-text antialiased">
+  <body class="ctp-latte bg-ctp-base text-ctp-text antialiased dark:ctp-mocha">
     <div class="">
-      <div class="sticky bg-ctp-base/90 backdrop-blur-sm top-0 px-6 py-5 sm:px-8 z-50 lg:flex lg:h-16 lg:items-center lg:py-0">
+      <div
+        class="sticky top-0 z-50 bg-ctp-base/90 px-6 py-5 backdrop-blur-sm sm:px-8 lg:flex lg:h-16 lg:items-center lg:py-0"
+      >
         <MainNav />
       </div>
       <div class="px-0">
-        <slot /> 
+        <slot />
       </div>
     </div>
     <!-- <Footer /> -->
     <footer class="bg-ctp-base text-ctp-text">
       <div class="container mx-auto px-6 py-8">
         <div class="flex flex-col items-center justify-center gap-8">
-          <a class="text-sm/6 font-medium hover:underline" href={GITHUB_REPO_URL} target="_blank" aria-label="Github" title="Github">
-            <GithubIcon class="w-6 h-6" />
+          <a
+            class="text-sm/6 font-medium hover:underline"
+            href={GITHUB_REPO_URL}
+            target="_blank"
+            aria-label="Github"
+            title="Github"
+          >
+            <GithubIcon class="h-6 w-6" />
           </a>
           <div>
-            Made with ❤️ by <a href="https://mgilet.xyz" target="_blank" class="text-ctp-blue hover:underline">Maximilien Gilet</a>
+            Made with ❤️ by <a
+              href="https://mgilet.xyz"
+              target="_blank"
+              class="text-ctp-blue hover:underline">Maximilien Gilet</a
+            >
           </div>
         </div>
       </div>
     </footer>
   </body>
-
 </html>

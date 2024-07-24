@@ -1,6 +1,5 @@
 ---
-import { cn } from '../utils/cn';
-
+import { cn } from "@/utils/cn";
 
 interface Props {
   name: string;
@@ -10,27 +9,24 @@ const { name } = Astro.props;
 const revealDelay = 0.3;
 ---
 
-
 <div
-      style={
-        {
-          "--card-reveal-delay": `${revealDelay}s`,
-          "--card-opacity": 1,
-          transform: 
-            `perspective(300px) translate3d(0, 0, 0)`
-        }      }
-      class={cn(
-        "w-[273px] aspect-card relative overflow-hidden",
-        "flex items-center justify-center text-white font-serif text-2xl",
-        "transition-all duration-[600ms] ease-out"
-      )}
-    >
-        <div
-        class={cn(
-          "flex flex-col justify-end p-4 h-full w-full space-y-2 border border-white",
-          "transition-all duration-1000 ease-out delay-[--infos-delay]"
-        )}
-      >
-        <span>{name}</span>
-      </div>
-    </div>
+  style={{
+    "--card-reveal-delay": `${revealDelay}s`,
+    "--card-opacity": 1,
+    transform: `perspective(300px) translate3d(0, 0, 0)`,
+  }}
+  class={cn(
+    "w-[273px] aspect-card relative overflow-hidden",
+    "flex items-center justify-center text-white font-serif text-2xl",
+    "transition-all duration-[600ms] ease-out",
+  )}
+>
+  <div
+    class={cn(
+      "flex flex-col justify-end p-4 h-full w-full space-y-2 border border-white",
+      "transition-all duration-1000 ease-out delay-[--infos-delay]",
+    )}
+  >
+    <span>{name}</span>
+  </div>
+</div>

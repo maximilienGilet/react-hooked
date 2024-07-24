@@ -1,4 +1,4 @@
-import useSessionStorage from "../hooks/useSessionStorage";
+import useSessionStorage from "@/hooks/useSessionStorage";
 
 export default function UseSessionStorageExample() {
   const [value, setValue, removeValue] = useSessionStorage("my-key", "default");
@@ -8,19 +8,19 @@ export default function UseSessionStorageExample() {
       <p>Value: {value}</p>
       <div className="flex gap-4">
         <button
-          className="bg-ctp-blue px-4 py-2 rounded text-ctp-base"
+          className="rounded bg-ctp-blue px-4 py-2 text-ctp-base"
           onClick={() => setValue("new-value")}
         >
           Set value
         </button>
         <button
-          className="bg-ctp-pink px-4 py-2 rounded text-ctp-base"
+          className="rounded bg-ctp-pink px-4 py-2 text-ctp-base"
           onClick={() => setValue((currentValue) => currentValue + "-new")}
         >
           Append "-new" to value
         </button>
         <button
-          className="bg-ctp-red px-4 py-2 rounded text-ctp-base"
+          className="rounded bg-ctp-red px-4 py-2 text-ctp-base"
           onClick={() => removeValue()}
         >
           Remove value

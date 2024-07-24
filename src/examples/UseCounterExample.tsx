@@ -1,4 +1,4 @@
-import useCounter from "../hooks/useCounter";
+import useCounter from "@/hooks/useCounter";
 
 export default function UseCounterExample() {
   const { count, setCount, increment, decrement, reset } = useCounter(0);
@@ -7,25 +7,25 @@ export default function UseCounterExample() {
     <div className="flex flex-col items-center justify-center gap-4 p-4 text-ctp-text">
       <p>Count: {count}</p>
       <button
-        className="bg-ctp-green text-ctp-base py-2 px-4 rounded"
+        className="rounded bg-ctp-green px-4 py-2 text-ctp-base"
         onClick={() => increment()}
       >
         Increment
       </button>
       <button
-        className="bg-ctp-red text-ctp-base py-2 px-4 rounded"
+        className="rounded bg-ctp-red px-4 py-2 text-ctp-base"
         onClick={() => decrement()}
       >
         Decrement
       </button>
       <button
-        className="bg-ctp-yellow text-ctp-base py-2 px-4 rounded"
+        className="rounded bg-ctp-yellow px-4 py-2 text-ctp-base"
         onClick={() => reset()}
       >
         Reset
       </button>
       <button
-        className="bg-ctp-blue text-ctp-base py-2 px-4 rounded"
+        className="rounded bg-ctp-blue px-4 py-2 text-ctp-base"
         onClick={() => setCount(10)}
       >
         Set to 10

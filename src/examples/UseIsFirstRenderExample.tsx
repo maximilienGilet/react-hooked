@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useIsFirstRender from "../hooks/useIsFirstRender";
+import useIsFirstRender from "@/hooks/useIsFirstRender";
 
 export default function UseIsFirstRenderExample() {
   const isFirstRender = useIsFirstRender();
@@ -10,7 +10,7 @@ export default function UseIsFirstRenderExample() {
       <p>Is first render: {isFirstRender ? "yes" : "no"}</p>
       <p>Count: {count}</p>
       <button
-        className="bg-ctp-blue px-4 py-2 rounded text-ctp-base"
+        className="rounded bg-ctp-blue px-4 py-2 text-ctp-base"
         onClick={() => setCount(count + 1)}
       >
         Increment

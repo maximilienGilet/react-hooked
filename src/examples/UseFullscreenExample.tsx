@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import useFullscreen from "../hooks/useFullscreen";
+import useFullscreen from "@/hooks/useFullscreen";
 
 export default function UseFullscreenExample() {
   const ref = useRef(null);
@@ -15,7 +15,7 @@ export default function UseFullscreenExample() {
       <p>Fullscreen is {isFullscreen ? "enabled" : "disabled"}.</p>
       <div className="flex flex-row items-center justify-center gap-4 p-4">
         <button
-          className="bg-ctp-blue text-ctp-base py-2 px-4 rounded"
+          className="rounded bg-ctp-blue px-4 py-2 text-ctp-base"
           onClick={() => setEnabled(!enabled)}
         >
           Toggle

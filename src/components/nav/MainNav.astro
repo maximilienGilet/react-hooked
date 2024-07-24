@@ -1,79 +1,87 @@
 ---
-import HookIcon from "../icons/HookIcon.astro";
-import MoonIcon from "../icons/MoonIcon.astro";
-import SunIcon from "../icons/SunIcon.astro";
-import GithubIcon from "../icons/GithubIcon.astro";
-import { GITHUB_REPO_URL } from "../../utils/constants";
+import MoonIcon from "@/components/icons/MoonIcon.astro";
+import SunIcon from "@/components/icons/SunIcon.astro";
+import GithubIcon from "@/components/icons/GithubIcon.astro";
+import { GITHUB_REPO_URL } from "@/utils/constants";
 ---
 
-<div class="mx-auto flex w-full max-w-xl items-center justify-between lg:max-w-7xl gap-4 flex-wrap">
+<div
+  class="mx-auto flex w-full max-w-xl flex-wrap items-center justify-between gap-4 lg:max-w-7xl"
+>
   <div class="flex items-center gap-2 sm:gap-8">
     <div class="flex items-center gap-2">
-      <a aria-label="Home" href="/" class="font-bold">React Hooked 
-        <!-- <HookIcon class="inline-block w-4 h-4 mb-1" /> -->
-      </a>
-
-    <div class="text-sm/6 border-2 border-ctp-peach px-2 rounded-full text-ctp-peach pointer-events-none">
+      <a aria-label="Home" href="/" class="font-bold">React Hooked</a>
+      <div
+        class="pointer-events-none rounded-full border-2 border-ctp-peach px-2 text-sm/6 text-ctp-peach"
+      >
         Beta
       </div>
     </div>
     <a class="text-sm/6 font-medium hover:underline" href="/docs">Docs</a>
   </div>
-  <div class="flex items-center gap-4 sm:gap-8 ml-auto">
-    <a class="text-sm/6 font-medium hover:underline" href={GITHUB_REPO_URL} target="_blank" aria-label="Github" title="Github">
-      <GithubIcon class="w-6 h-6" />
+  <div class="ml-auto flex items-center gap-4 sm:gap-8">
+    <a
+      class="text-sm/6 font-medium hover:underline"
+      href={GITHUB_REPO_URL}
+      target="_blank"
+      aria-label="Github"
+      title="Github"
+    >
+      <GithubIcon class="h-6 w-6" />
     </a>
-    <button id="themeToggle" class="text-sm/6 font-medium" aria-label="Toggle theme" title="Toggle theme">
-      <SunIcon class="w-6 h-6 dark:hidden" />
-      <MoonIcon class="w-6 h-6 hidden dark:block" />
+    <button
+      id="themeToggle"
+      class="text-sm/6 font-medium"
+      aria-label="Toggle theme"
+      title="Toggle theme"
+    >
+      <SunIcon class="h-6 w-6 dark:hidden" />
+      <MoonIcon class="hidden h-6 w-6 dark:block" />
     </button>
   </div>
 </div>
 
-
-  <script>
-
-    const theme = (() => {
-      if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
-        return localStorage.getItem("theme");
-      }
-      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-        return "dark";
-      }
-      return "light";
-    })();
-
-    if (theme === "light") {
-      document.documentElement.classList.remove("dark");
-    } else {
-      document.documentElement.classList.add("dark");
+<script>
+  const theme = (() => {
+    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+      return localStorage.getItem("theme");
     }
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      return "dark";
+    }
+    return "light";
+  })();
 
-    window.localStorage.setItem("theme", theme ?? "light");
+  if (theme === "light") {
+    document.documentElement.classList.remove("dark");
+  } else {
+    document.documentElement.classList.add("dark");
+  }
 
-    const handleToggleClick = () => {
-      const element = document.documentElement;
-      element.classList.toggle("dark");
+  window.localStorage.setItem("theme", theme ?? "light");
 
-      const isDark = element.classList.contains("dark");
-      localStorage.setItem("theme", isDark ? "dark" : "light");
-    };
+  const handleToggleClick = () => {
+    const element = document.documentElement;
+    element.classList.toggle("dark");
+
+    const isDark = element.classList.contains("dark");
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+  };
+
+  const themeToggle = document.getElementById("themeToggle");
+
+  if (themeToggle) {
+    themeToggle.addEventListener("click", handleToggleClick);
+  }
+
+  document.addEventListener("astro:after-swap", () => {
+    if (localStorage.getItem("theme") === "dark")
+      document.documentElement.classList.toggle("dark", true);
 
     const themeToggle = document.getElementById("themeToggle");
 
     if (themeToggle) {
       themeToggle.addEventListener("click", handleToggleClick);
     }
-
-    document.addEventListener("astro:after-swap", () => {
-      if (localStorage.getItem("theme") === "dark")
-        document.documentElement.classList.toggle("dark", true);
-
-      const themeToggle = document.getElementById("themeToggle");
-
-      if (themeToggle) {
-        themeToggle.addEventListener("click", handleToggleClick);
-      }
-    });
-
-  </script>
+  });
+</script>

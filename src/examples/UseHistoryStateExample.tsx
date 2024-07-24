@@ -1,5 +1,5 @@
 import React from "react";
-import useHistoryState from "../hooks/useHistoryState";
+import useHistoryState from "@/hooks/useHistoryState";
 
 export default function UseHistoryStateExample() {
   const [state, setState, history] = useHistoryState<number>(0, 20);
@@ -18,7 +18,7 @@ export default function UseHistoryStateExample() {
   }, [history]);
 
   return (
-    <div className="flex items-start justify-center gap-8 p-4 w-full text-ctp-text">
+    <div className="flex w-full items-start justify-center gap-8 p-4 text-ctp-text">
       <section className="flex flex-col items-center justify-center gap-4 p-4">
         <p className="text-lg">Counter</p>
         <div className="flex gap-4">

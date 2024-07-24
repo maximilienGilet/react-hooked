@@ -1,18 +1,30 @@
 <div class="container mx-auto">
   <!-- notice here, the key rule is `[&_svg]:open:-rotate-180` -->
-  <details class="bg-ctp-surface0 border border-ctp-surface1 p-4 [&_svg]:open:-rotate-180 rounded-lg shadow">
+  <details
+    class="rounded-lg border border-ctp-surface1 bg-ctp-surface0 p-4 shadow [&_svg]:open:-rotate-180"
+  >
     <!-- notice here, we have disabled the summary's default triangle/arrow -->
     <summary class="flex cursor-pointer list-none items-center gap-4 text-lg">
       <div>
         <!-- notice here, we added our own triangle/arrow svg -->
-        <svg class="rotate-0 transform transition-all duration-300" fill="none" height="20" width="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+        <svg
+          class="rotate-0 transform transition-all duration-300"
+          fill="none"
+          height="20"
+          width="20"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
           <polyline points="6 9 12 15 18 9"></polyline>
         </svg>
       </div>
-      <slot name="title">
+      <slot name="title" />
+      <div class="mt-4">
+        <slot />
+      </div>
     </summary>
-    <div class="mt-4">
-      <slot />
-    </div>
   </details>
 </div>
