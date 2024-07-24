@@ -141,176 +141,176 @@ const requiredLocals = doc.tags.filter(
       </div>
     </div>
   </div>
+  <p class="mb-6">{doc.description}</p>
+  {
+    requiredPackages.length > 0 && (
+      <AlertBox>
+        <div slot="icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 fill-current"
+            viewBox="0 0 256 256"
+          >
+            <>
+              <rect width="256" height="256" fill="none" />
+              <circle
+                cx="128"
+                cy="128"
+                r="96"
+                fill="none"
+                stroke="currentColor"
+                stroke-miterlimit="10"
+                stroke-width="16"
+              />
+              <line
+                x1="128"
+                y1="136"
+                x2="128"
+                y2="80"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="16"
+              />
+              <circle cx="128" cy="172" r="12" />
+            </>
+          </svg>
+        </div>
+        <div slot="title">
+          This hook requires the following packages:
+          <span class="font-semibold text-ctp-crust">
+            {requiredPackages.map((requiredPackages) => (
+              <a
+                href={`https://www.npmjs.com/package/${requiredPackages.description}`}
+                class="mr-1 font-semibold text-ctp-crust hover:underline"
+                target="_blank"
+              >
+                {requiredPackages.description}
+              </a>
+            ))}
+          </span>
+        </div>
+        <div class="mt-4">
+          <PackageCommand
+            packageNames={requiredPackages.map((p) => p.description ?? "")}
+          />
+        </div>
+      </AlertBox>
+    )
+  }
+  {
+    requiredLocals.length > 0 && (
+      <AlertBox>
+        <div slot="icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 fill-current"
+            viewBox="0 0 256 256"
+          >
+            <>
+              <rect width="256" height="256" fill="none" />
+              <circle
+                cx="128"
+                cy="128"
+                r="96"
+                fill="none"
+                stroke="currentColor"
+                stroke-miterlimit="10"
+                stroke-width="16"
+              />
+              <line
+                x1="128"
+                y1="136"
+                x2="128"
+                y2="80"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="16"
+              />
+              <circle cx="128" cy="172" r="12" />
+            </>
+          </svg>
+        </div>
+        <div slot="title">
+          This hook requires the following hooks:
+          <span class="font-semibold text-ctp-crust">
+            {requiredLocals.map((requiredLocals) => (
+              <a
+                href={`/docs/${requiredLocals.description}`}
+                class="mr-1 font-semibold text-ctp-crust hover:underline"
+                target="_blank"
+              >
+                {requiredLocals.description?.split("./")[1]}
+              </a>
+            ))}
+          </span>
+        </div>
+      </AlertBox>
+    )
+  }
+
+  {
+    example && (
+      <section class="mt-12">
+        <h2 class="mb-4 text-2xl">Example</h2>
+        <div class="ctp-frappe flex flex-row flex-wrap">
+          <input
+            id="tab-demo"
+            type="radio"
+            name="demo-tabs"
+            class="peer/tab-demo absolute opacity-0"
+            checked
+          />
+          <label
+            for="tab-demo"
+            class="flex cursor-pointer flex-row items-stretch gap-2 rounded-t-lg bg-ctp-surface1 p-2 px-4 text-ctp-text peer-checked/tab-demo:bg-ctp-base"
+          >
+            Demo
+          </label>
+
+          <input
+            id="tab-code"
+            type="radio"
+            name="demo-tabs"
+            class="peer/tab-code absolute opacity-0"
+          />
+          <label
+            for="tab-code"
+            class="flex cursor-pointer flex-row items-stretch gap-2 rounded-t-lg bg-ctp-surface1 p-2 px-4 text-ctp-text peer-checked/tab-code:bg-ctp-base"
+          >
+            Code
+          </label>
+
+          <div class="h-0 basis-full" />
+
+          <div class="hidden w-full peer-checked/tab-demo:block">
+            <Example
+              name={hookName}
+              client:only
+              className="rounded-xl shadow-xl rounded-tl-none"
+            />
+          </div>
+          <div class="hidden w-full peer-checked/tab-code:block">
+            <CodeBox
+              code={example.trim()}
+              lang="tsx"
+              class="rounded-xl rounded-tl-none shadow-xl"
+            />
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <section class="mt-12">
+    <h2 class="mb-4 text-2xl">Code</h2>
+
+    <CodeBox code={hook.trim()} lang="ts" class="rounded-xl shadow-xl" />
+  </section>
 </DocsLayout>
-<p class="mb-6">{doc.description}</p>
-{
-  requiredPackages.length > 0 && (
-    <AlertBox>
-      <div slot="icon">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-6 w-6 fill-current"
-          viewBox="0 0 256 256"
-        >
-          <>
-            <rect width="256" height="256" fill="none" />
-            <circle
-              cx="128"
-              cy="128"
-              r="96"
-              fill="none"
-              stroke="currentColor"
-              stroke-miterlimit="10"
-              stroke-width="16"
-            />
-            <line
-              x1="128"
-              y1="136"
-              x2="128"
-              y2="80"
-              fill="none"
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="16"
-            />
-            <circle cx="128" cy="172" r="12" />
-          </>
-        </svg>
-      </div>
-      <div slot="title">
-        This hook requires the following packages:
-        <span class="font-semibold text-ctp-crust">
-          {requiredPackages.map((requiredPackages) => (
-            <a
-              href={`https://www.npmjs.com/package/${requiredPackages.description}`}
-              class="mr-1 font-semibold text-ctp-crust hover:underline"
-              target="_blank"
-            >
-              {requiredPackages.description}
-            </a>
-          ))}
-        </span>
-      </div>
-      <div class="mt-4">
-        <PackageCommand
-          packageNames={requiredPackages.map((p) => p.description ?? "")}
-        />
-      </div>
-    </AlertBox>
-  )
-}
-{
-  requiredLocals.length > 0 && (
-    <AlertBox>
-      <div slot="icon">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-6 w-6 fill-current"
-          viewBox="0 0 256 256"
-        >
-          <>
-            <rect width="256" height="256" fill="none" />
-            <circle
-              cx="128"
-              cy="128"
-              r="96"
-              fill="none"
-              stroke="currentColor"
-              stroke-miterlimit="10"
-              stroke-width="16"
-            />
-            <line
-              x1="128"
-              y1="136"
-              x2="128"
-              y2="80"
-              fill="none"
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="16"
-            />
-            <circle cx="128" cy="172" r="12" />
-          </>
-        </svg>
-      </div>
-      <div slot="title">
-        This hook requires the following hooks:
-        <span class="font-semibold text-ctp-crust">
-          {requiredLocals.map((requiredLocals) => (
-            <a
-              href={`/docs/${requiredLocals.description}`}
-              class="mr-1 font-semibold text-ctp-crust hover:underline"
-              target="_blank"
-            >
-              {requiredLocals.description?.split("./")[1]}
-            </a>
-          ))}
-        </span>
-      </div>
-    </AlertBox>
-  )
-}
-
-{
-  example && (
-    <section class="mt-12">
-      <h2 class="mb-4 text-2xl">Example</h2>
-      <div class="ctp-frappe flex flex-row flex-wrap">
-        <input
-          id="tab-demo"
-          type="radio"
-          name="demo-tabs"
-          class="peer/tab-demo absolute opacity-0"
-          checked
-        />
-        <label
-          for="tab-demo"
-          class="flex cursor-pointer flex-row items-stretch gap-2 rounded-t-lg bg-ctp-surface1 p-2 px-4 text-ctp-text peer-checked/tab-demo:bg-ctp-base"
-        >
-          Demo
-        </label>
-
-        <input
-          id="tab-code"
-          type="radio"
-          name="demo-tabs"
-          class="peer/tab-code absolute opacity-0"
-        />
-        <label
-          for="tab-code"
-          class="flex cursor-pointer flex-row items-stretch gap-2 rounded-t-lg bg-ctp-surface1 p-2 px-4 text-ctp-text peer-checked/tab-code:bg-ctp-base"
-        >
-          Code
-        </label>
-
-        <div class="h-0 basis-full" />
-
-        <div class="hidden w-full peer-checked/tab-demo:block">
-          <Example
-            name={hookName}
-            client:only
-            className="rounded-xl shadow-xl rounded-tl-none"
-          />
-        </div>
-        <div class="hidden w-full peer-checked/tab-code:block">
-          <CodeBox
-            code={example.trim()}
-            lang="tsx"
-            class="rounded-xl rounded-tl-none shadow-xl"
-          />
-        </div>
-      </div>
-    </section>
-  )
-}
-
-<section class="mt-12">
-  <h2 class="mb-4 text-2xl">Code</h2>
-
-  <CodeBox code={hook.trim()} lang="ts" class="rounded-xl shadow-xl" />
-</section>
 
 <script is:inline define:vars={{ hookName, hook }}>
   // Download button
