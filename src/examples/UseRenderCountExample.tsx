@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useRenderCount from "../hooks/useRenderCount";
+import useRenderCount from "@/hooks/useRenderCount";
 
 export default function UseRenderCountExample() {
   const renderCount = useRenderCount();

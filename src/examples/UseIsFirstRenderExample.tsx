@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useIsFirstRender from "../hooks/useIsFirstRender";
+import useIsFirstRender from "@/hooks/useIsFirstRender";
 
 export default function UseIsFirstRenderExample() {
   const isFirstRender = useIsFirstRender();

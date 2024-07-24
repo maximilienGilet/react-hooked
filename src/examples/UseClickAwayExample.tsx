@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import useClickAway from "../hooks/useClickAway";
+import useClickAway from "@/hooks/useClickAway";
 
 export default function UseClickAwayExample() {
   const ref = useRef(null);

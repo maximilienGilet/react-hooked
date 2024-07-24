@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import useBattery, { type BatteryState } from "../hooks/useBattery";
+import useBattery, { type BatteryState } from "@/hooks/useBattery";
 
 export default function UseBatteryExample() {
   const { isSupported, ...batteryState } = useBattery();

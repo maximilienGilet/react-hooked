@@ -1,4 +1,4 @@
-import useScrollLock from "../hooks/useScrollLock";
+import useScrollLock from "@/hooks/useScrollLock";
 
 export default function UseScrollLockExample() {
   const { isLocked, lock, unlock } = useScrollLock({

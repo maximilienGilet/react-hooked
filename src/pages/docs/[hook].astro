@@ -1,14 +1,14 @@
 ---
-import DocsLayout from '../../layouts/DocsLayout.astro';
-import AlertBox from '../../components/AlertBox.astro';
-import PackageCommand from '../../components/PackageCommand.astro';
-import DownloadCommand from '../../components/DownloadCommand.astro';
-import { extractHookName } from '../../utils/hooks';
-import jsDoc2JSON from '../../utils/jsdoc2json.ts';
-import CodeBox from '../../components/CodeBox.astro';
-import Example from '../../components/Example.tsx';
-import { capitalize } from '../../utils/strings';
-import ExpandIcon from '../../components/icons/ExpandIcon.astro';
+import DocsLayout from '@/layouts/DocsLayout.astro';
+import AlertBox from '@/components/AlertBox.astro';
+import PackageCommand from '@/components/PackageCommand.astro';
+import DownloadCommand from '@/components/DownloadCommand.astro';
+import { extractHookName } from '@/utils/hooks';
+import jsDoc2JSON from '@/utils/jsdoc2json.ts';
+import CodeBox from '@/components/CodeBox.astro';
+import Example from '@/components/Example.tsx';
+import { capitalize } from '@/utils/strings';
+import ExpandIcon from '@/components/icons/ExpandIcon.astro';
 
 export async function getStaticPaths() {
   const hooks: Record<string, string> = import.meta.glob('/src/hooks/*.ts', {query: '?raw', eager: true, import: 'default'});

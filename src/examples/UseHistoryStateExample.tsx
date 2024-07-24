@@ -1,5 +1,5 @@
 import React from "react";
-import useHistoryState from "../hooks/useHistoryState";
+import useHistoryState from "@/hooks/useHistoryState";
 
 export default function UseHistoryStateExample() {
   const [state, setState, history] = useHistoryState<number>(0, 20);

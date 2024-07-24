@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useBeforeUnload from "../hooks/useBeforeUnload";
+import useBeforeUnload from "@/hooks/useBeforeUnload";
 
 export default function UseBeforeUnloadExample() {
   const [isEnabled, setIsEnabled] = useState(true);

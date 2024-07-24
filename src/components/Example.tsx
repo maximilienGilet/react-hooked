@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { capitalize } from "../utils/strings";
+import { capitalize } from "@/utils/strings";
 import { Suspense, lazy } from "react";
 
 function Fallback() {

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import useIntersectionObserver from "../hooks/useIntersectionObserver";
+import useIntersectionObserver from "@/hooks/useIntersectionObserver";
 
 export default function UseIntersectionObserverExample() {
   const [ref, inView] = useIntersectionObserver();

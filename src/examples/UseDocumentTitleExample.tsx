@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useDocumentTitle from "../hooks/useDocumentTitle";
+import useDocumentTitle from "@/hooks/useDocumentTitle";
 
 export default function UseDocumentTitleExample() {
   const [title, setTitle] = useState("Hello, world!");

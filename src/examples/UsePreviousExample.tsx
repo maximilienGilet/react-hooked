@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import usePrevious from "../hooks/usePrevious";
+import usePrevious from "@/hooks/usePrevious";
 
 export default function UsePreviousExample() {
   const [input, setInput] = useState("");

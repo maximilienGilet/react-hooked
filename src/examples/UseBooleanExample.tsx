@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import useBoolean from "../hooks/useBoolean";
+import useBoolean from "@/hooks/useBoolean";
 
 export default function UseBooleanExample() {
   const { value, setTrue, setFalse, toggle } = useBoolean(false);

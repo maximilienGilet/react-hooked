@@ -1,4 +1,4 @@
-import useGeolocation from "../hooks/useGeolocation";
+import useGeolocation from "@/hooks/useGeolocation";
 
 export default function UseGeolocationExample() {
   const {

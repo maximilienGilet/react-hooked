@@ -1,4 +1,4 @@
-import usePreferredLanguage from "../hooks/usePreferredLanguage";
+import usePreferredLanguage from "@/hooks/usePreferredLanguage";
 
 export default function UsePreferredLanguageExample() {
   const language = usePreferredLanguage();

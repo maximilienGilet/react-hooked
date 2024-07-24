@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import useHover from "../hooks/useHover";
+import useHover from "@/hooks/useHover";
 
 const UseHoverExample = () => {
   const ref = useRef(null);

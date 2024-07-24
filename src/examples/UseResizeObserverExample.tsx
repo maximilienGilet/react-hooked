@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import useResizeObserver from "../hooks/useResizeObserver";
+import useResizeObserver from "@/hooks/useResizeObserver";
 
 export default function UseResizeObserverExample() {
   const ref = useRef<HTMLTextAreaElement>(null);

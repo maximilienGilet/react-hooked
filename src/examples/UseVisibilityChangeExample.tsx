@@ -1,4 +1,4 @@
-import useVisibilityChange from "../hooks/useVisibilityChange";
+import useVisibilityChange from "@/hooks/useVisibilityChange";
 import { useEffect, useState } from "react";
 
 export default function UseVisibilityChangeExample() {

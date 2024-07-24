@@ -1,4 +1,4 @@
-import useSessionStorage from "../hooks/useSessionStorage";
+import useSessionStorage from "@/hooks/useSessionStorage";
 
 export default function UseSessionStorageExample() {
   const [value, setValue, removeValue] = useSessionStorage("my-key", "default");

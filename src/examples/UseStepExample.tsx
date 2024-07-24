@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import useStep from "../hooks/useStep";
+import useStep from "@/hooks/useStep";
 
 export default function UseStepExample() {
   const [currentStep, helpers] = useStep(5);

@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import useFullscreen from "../hooks/useFullscreen";
+import useFullscreen from "@/hooks/useFullscreen";
 
 export default function UseFullscreenExample() {
   const ref = useRef(null);

@@ -1,6 +1,6 @@
 ---
-import HookIcon from "../components/icons/HookIcon.astro";
-import LandingLayout from "../layouts/LandingLayout.astro";
+import HookIcon from "@/components/icons/HookIcon.astro";
+import LandingLayout from "@/layouts/LandingLayout.astro";
 
 const hooks: Record<string, string> = import.meta.glob('/src/hooks/*.ts', {query: '?raw', eager: true, import: 'default'});
 const hooksCount = Object.keys(hooks).length;

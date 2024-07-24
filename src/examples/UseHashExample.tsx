@@ -1,4 +1,4 @@
-import useHash from "../hooks/useHash";
+import useHash from "@/hooks/useHash";
 
 export default function UseHashExample() {
   const [hash, setHash] = useHash();

@@ -1,4 +1,4 @@
-import useIdle from "../hooks/useIdle";
+import useIdle from "@/hooks/useIdle";
 
 export default function UseIdleExample() {
   const isIdle = useIdle(1000);

@@ -1,4 +1,4 @@
-import useScript from "../hooks/useScript";
+import useScript from "@/hooks/useScript";
 
 export default function UseScriptExample() {
   const status = useScript(

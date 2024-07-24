@@ -1,4 +1,4 @@
-import useCookie from "../hooks/useCookie";
+import useCookie from "@/hooks/useCookie";
 
 export default function UseCookieExample() {
   const [cookie, setCookie, removeCookie] = useCookie("example-cookie");

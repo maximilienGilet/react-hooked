@@ -1,4 +1,4 @@
-import useList from "../hooks/useList";
+import useList from "@/hooks/useList";
 
 export default function UseListExample() {
   const [list, { push, removeAt, insertAt, updateAt, clear }] = useList([

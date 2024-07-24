@@ -1,4 +1,4 @@
-import useWindowScroll from "../hooks/useWindowScroll";
+import useWindowScroll from "@/hooks/useWindowScroll";
 
 export default function UseWindowScrollExample() {
   const { x, y } = useWindowScroll();

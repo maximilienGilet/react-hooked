@@ -1,4 +1,4 @@
-import useLocalStorage from "../hooks/useLocalStorage";
+import useLocalStorage from "@/hooks/useLocalStorage";
 
 export default function UseLocalStorageExample() {
   const [value, setValue, removeValue] = useLocalStorage("my-key", "default");

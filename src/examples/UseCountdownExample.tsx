@@ -1,4 +1,4 @@
-import useCountdown from "../hooks/useCountdown";
+import useCountdown from "@/hooks/useCountdown";
 
 export default function UseCountdownExample() {
   const [count, { startCountdown, stopCountdown, resetCountdown }] =

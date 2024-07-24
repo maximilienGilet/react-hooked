@@ -1,4 +1,4 @@
-import useCopyToClipboard from "../hooks/useCopyToClipboard";
+import useCopyToClipboard from "@/hooks/useCopyToClipboard";
 
 export default function UseCopyToClipboardExample() {
   const [copiedText, copy] = useCopyToClipboard();
