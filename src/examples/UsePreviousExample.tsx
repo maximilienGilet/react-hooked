@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import usePrevious from "@/hooks/usePrevious";
 
 export default function UsePreviousExample() {
