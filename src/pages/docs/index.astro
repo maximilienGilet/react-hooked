@@ -1,22 +1,25 @@
 ---
-import Collapsible from '@/components/Collapsible.astro';
-import DocsLayout from '@/layouts/DocsLayout.astro';
-import { GITHUB_REPO_URL } from '@/utils/constants';
+import Collapsible from "@/components/Collapsible.astro";
+import DocsLayout from "@/layouts/DocsLayout.astro";
+import { GITHUB_REPO_URL } from "@/utils/constants";
 ---
 
 <DocsLayout title="Getting started" selectedPage="docs">
-  <article class="max-w-3xl mx-auto">
-    <h1 class="text-5xl mb-6">Getting started</h1>
-    <p class="text-xl mb-8">
-      React Hooked is a collection of React Hooks that can be used to build performant and accessible React applications.
+  <article class="mx-auto max-w-3xl">
+    <h1 class="mb-6 text-5xl">Getting started</h1>
+    <p class="mb-8 text-xl">
+      React Hooked is a collection of React Hooks that can be used to build
+      performant and accessible React applications.
     </p>
-    <p class="text-lg mb-6">This is <strong>not</strong> a library, no installation is required. You can simply copy and paste or download the files to your application.</p>
+    <p class="mb-6 text-lg">
+      This is <strong>not</strong> a library, no installation is required. You can
+      simply copy and paste or download the files to your application.
+    </p>
     <Collapsible>
-      <div slot="title">
-        Why copy/paste and not packaged as a dependency?
-      </div>
+      <div slot="title">Why copy/paste and not packaged as a dependency?</div>
       <p>
-        The idea behind this is to give you ownership and control over the code, allowing you to customize the hooks to your needs.
+        The idea behind this is to give you ownership and control over the code,
+        allowing you to customize the hooks to your needs.
         <br />
         Also, you don't need to install another package to use just a few hooks.
       </p>
@@ -29,42 +32,63 @@ import { GITHUB_REPO_URL } from '@/utils/constants';
       <p>
         Yes.
         <br />
-        In the meantime, you can download the hooks with a simple curl or wget command. The commands are provided in the download dropdown of the hook.
+        In the meantime, you can download the hooks with a simple curl or wget command.
+        The commands are provided in the download dropdown of the hook.
       </p>
     </Collapsible>
     <br />
     <Collapsible>
-      <div slot="title">
-        Can I use this in my project?
-      </div>
+      <div slot="title">Can I use this in my project?</div>
       <p>
-        Yes. Free to use for personal and commercial projects. No attribution required.
+        Yes. Free to use for personal and commercial projects. No attribution
+        required.
       </p>
     </Collapsible>
     <br />
     <Collapsible>
-      <div slot="title">
-        How can I contribute?
-      </div>
+      <div slot="title">How can I contribute?</div>
       <p>
-        You can contribute by opening an issue or a pull request on the <a href={GITHUB_REPO_URL} target="_blank" rel="noopener noreferrer" class="text-ctp-blue hover:underline">GitHub repository</a>.
+        You can contribute by opening an issue or a pull request on the <a
+          href={GITHUB_REPO_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-ctp-blue hover:underline">GitHub repository</a
+        >.
       </p>
     </Collapsible>
     <section class="mt-12">
-      <h2 class="text-3xl mb-4">Shout out</h2>
-      <p class="text-lg">Shout out to the other hooks libraries that inspired this one:</p>
-      <ul class="list-disc list-inside my-4">
+      <h2 class="mb-4 text-3xl">Shout out</h2>
+      <p class="text-lg">
+        Shout out to the other hooks libraries that inspired this one:
+      </p>
+      <ul class="my-4 list-inside list-disc">
         <li class="mb-2">
-          <a href="https://usehooks-ts.com/"  target="_blank" class="text-ctp-blue hover:underline">usehooks-ts</a>
+          <a
+            href="https://usehooks-ts.com/"
+            target="_blank"
+            class="text-ctp-blue hover:underline">usehooks-ts</a
+          >
         </li>
         <li class="mb-2">
-          <a href="https://usehooks.com/"  target="_blank" class="text-ctp-blue hover:underline">useHooks</a>
+          <a
+            href="https://usehooks.com/"
+            target="_blank"
+            class="text-ctp-blue hover:underline">useHooks</a
+          >
         </li>
         <li class="mb-2">
-          <a href="https://github.com/streamich/react-use"  target="_blank" class="text-ctp-blue hover:underline">react-use</a>
+          <a
+            href="https://github.com/streamich/react-use"
+            target="_blank"
+            class="text-ctp-blue hover:underline">react-use</a
+          >
         </li>
         <li class="mb-2">
-          <a href="https://github.com/craig1123/react-recipes"  target="_blank" class="text-ctp-blue hover:underline">react-recipes</a>
+          <a
+            href="https://github.com/craig1123/react-recipes"
+            target="_blank"
+            class="text-ctp-blue hover:underline">react-recipes</a
+          >
         </li>
       </ul>
     </section>

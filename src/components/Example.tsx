@@ -5,7 +5,7 @@ import { Suspense, lazy } from "react";
 function Fallback() {
   return (
     <div
-      className="animate-spin inline-block size-6 border-[3px] border-current border-t-transparent text-ctp-pink rounded-full dark:text-ctp-pink"
+      className="inline-block size-6 animate-spin rounded-full border-[3px] border-current border-t-transparent text-ctp-pink dark:text-ctp-pink"
       role="status"
       aria-label="loading"
     >
@@ -24,8 +24,8 @@ export default function Example({ name, className }: ExampleProps) {
   );
   return (
     <div className="ctp-frappe">
-      <div className={clsx("gap-4 p-4 rounded-xl bg-ctp-base", className)}>
-        <div className="flex flex-auto flex-col justify-center items-center p-4 md:p-5">
+      <div className={clsx("gap-4 rounded-xl bg-ctp-base p-4", className)}>
+        <div className="flex flex-auto flex-col items-center justify-center p-4 md:p-5">
           <div className="flex justify-center">
             <Suspense fallback={<Fallback />}>
               <ExampleComponent />

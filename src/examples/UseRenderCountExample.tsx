@@ -7,12 +7,12 @@ export default function UseRenderCountExample() {
   const [countTwo, setCountTwo] = useState(0);
 
   return (
-    <div className="space-y-4 flex flex-col items-center">
+    <div className="flex flex-col items-center space-y-4">
       <button
         onClick={() => {
           setCountOne(countOne + 1);
         }}
-        className="bg-ctp-sky text-ctp-base py-2 px-4 rounded w-full"
+        className="w-full rounded bg-ctp-sky px-4 py-2 text-ctp-base"
       >
         Counter One: {countOne}
       </button>
@@ -20,7 +20,7 @@ export default function UseRenderCountExample() {
         onClick={() => {
           setCountTwo(countTwo + 1);
         }}
-        className="bg-ctp-green text-ctp-base py-2 px-4 rounded w-full"
+        className="w-full rounded bg-ctp-green px-4 py-2 text-ctp-base"
       >
         Counter Two: {countTwo}
       </button>
@@ -29,7 +29,7 @@ export default function UseRenderCountExample() {
           setCountOne(0);
           setCountTwo(0);
         }}
-        className="bg-ctp-red text-black py-2 px-4 rounded w-min"
+        className="w-min rounded bg-ctp-red px-4 py-2 text-black"
       >
         Reset
       </button>

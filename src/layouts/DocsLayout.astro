@@ -1,9 +1,9 @@
 ---
-import { ViewTransitions } from 'astro:transitions';
+import { ViewTransitions } from "astro:transitions";
 import MobileNavbar from "@/components/nav/MobileNavbar.astro";
 import Navbar from "@/components/nav/Navbar.astro";
 import { getHooksNames } from "@/utils/hooks";
-import MainNav from '@/components/nav/MainNav.astro';
+import MainNav from "@/components/nav/MainNav.astro";
 
 interface Props {
   title: string;
@@ -13,35 +13,36 @@ interface Props {
 const hookNames = getHooksNames();
 const { title, selectedPage } = Astro.props;
 ---
+
 <html lang="fr">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="stylesheet" href="/style.css" />
     <title>{title} - React Hooked 🪝</title>
     <ViewTransitions />
   </head>
-  <body class="dark:ctp-mocha ctp-latte bg-ctp-base text-ctp-text antialiased">
+  <body class="ctp-latte bg-ctp-base text-ctp-text antialiased dark:ctp-mocha">
     <div class="">
-      <div class="sticky top-0 border-b border-zinc-950/10 bg-ctp-mantle px-6 py-5 sm:px-8 z-50 lg:flex lg:h-16 lg:items-center lg:py-0">
+      <div
+        class="sticky top-0 z-50 border-b border-zinc-950/10 bg-ctp-mantle px-6 py-5 sm:px-8 lg:flex lg:h-16 lg:items-center lg:py-0"
+      >
         <MainNav />
         <MobileNavbar items={hookNames} selectedPage={selectedPage} />
       </div>
-    <div class="px-6 lg:px-8">    
-      <div class="mx-auto max-w-xl lg:max-w-7xl">
-        <div class="mx-auto flex max-w-xl items-start gap-x-12 lg:max-w-7xl">
+      <div class="px-6 lg:px-8">
+        <div class="mx-auto max-w-xl lg:max-w-7xl">
+          <div class="mx-auto flex max-w-xl items-start gap-x-12 lg:max-w-7xl">
             <Navbar items={hookNames} selectedPage={selectedPage} />
-          <main class="min-w-0 flex-1 gap-x-12 pb-16 pt-8 lg:pt-12">
-            <slot /> 
-          </main>
+            <main class="min-w-0 flex-1 gap-x-12 pb-16 pt-8 lg:pt-12">
+              <slot />
+            </main>
+          </div>
         </div>
+        <article></article>
       </div>
-    <article>
-    </article>
-</div>
-</div>
+    </div>
     <!-- <Footer /> -->
   </body>
-
 </html>

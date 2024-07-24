@@ -7,13 +7,13 @@ export default function UseCookieExample() {
     <div className="flex flex-col items-center justify-center gap-4 p-4 text-ctp-text">
       <p>Cookie: {cookie}</p>
       <button
-        className="bg-ctp-blue text-ctp-base py-2 px-4 rounded"
+        className="rounded bg-ctp-blue px-4 py-2 text-ctp-base"
         onClick={() => setCookie("example-value")}
       >
         Set cookie
       </button>
       <button
-        className="bg-ctp-red text-ctp-base py-2 px-4 rounded"
+        className="rounded bg-ctp-red px-4 py-2 text-ctp-base"
         onClick={() => removeCookie()}
       >
         Delete cookie

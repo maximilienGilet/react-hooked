@@ -1,146 +1,325 @@
 ---
-import DocsLayout from '@/layouts/DocsLayout.astro';
-import AlertBox from '@/components/AlertBox.astro';
-import PackageCommand from '@/components/PackageCommand.astro';
-import DownloadCommand from '@/components/DownloadCommand.astro';
-import { extractHookName } from '@/utils/hooks';
-import jsDoc2JSON from '@/utils/jsdoc2json.ts';
-import CodeBox from '@/components/CodeBox.astro';
-import Example from '@/components/Example.tsx';
-import { capitalize } from '@/utils/strings';
-import ExpandIcon from '@/components/icons/ExpandIcon.astro';
+import DocsLayout from "@/layouts/DocsLayout.astro";
+import AlertBox from "@/components/AlertBox.astro";
+import PackageCommand from "@/components/PackageCommand.astro";
+import DownloadCommand from "@/components/DownloadCommand.astro";
+import { extractHookName } from "@/utils/hooks";
+import jsDoc2JSON from "@/utils/jsdoc2json.ts";
+import CodeBox from "@/components/CodeBox.astro";
+import Example from "@/components/Example.tsx";
+import { capitalize } from "@/utils/strings";
+import ExpandIcon from "@/components/icons/ExpandIcon.astro";
 
 export async function getStaticPaths() {
-  const hooks: Record<string, string> = import.meta.glob('/src/hooks/*.ts', {query: '?raw', eager: true, import: 'default'});
-  const examples: Record<string, string> = import.meta.glob('/src/examples/*.tsx', {query: '?raw', eager: true, import: 'default'});
+  const hooks: Record<string, string> = import.meta.glob("/src/hooks/*.ts", {
+    query: "?raw",
+    eager: true,
+    import: "default",
+  });
+  const examples: Record<string, string> = import.meta.glob(
+    "/src/examples/*.tsx",
+    { query: "?raw", eager: true, import: "default" },
+  );
   return Object.keys(hooks).map((hook) => {
     const hookName = extractHookName(hook);
     const doc = jsDoc2JSON(hooks[hook]);
-    const example = examples[`/src/examples/${capitalize(hookName)}Example.tsx`];
+    const example =
+      examples[`/src/examples/${capitalize(hookName)}Example.tsx`];
     return {
       params: { hook: hookName },
       props: { hook: hooks[hook], hookName, doc, example },
-    }
+    };
   });
-
 }
 
-const {hookName, hook, doc, example } = Astro.props;
+const { hookName, hook, doc, example } = Astro.props;
 
-const requiredPackages = doc.tags.filter((el) => el.tag === "requires" && el.type === "package");
-const requiredLocals = doc.tags.filter((el) => el.tag === "requires" && el.type === "local");
+const requiredPackages = doc.tags.filter(
+  (el) => el.tag === "requires" && el.type === "package",
+);
+const requiredLocals = doc.tags.filter(
+  (el) => el.tag === "requires" && el.type === "local",
+);
 ---
+
 <DocsLayout title={hookName} selectedPage={hookName}>
-  <div class="flex items-center justify-between mb-4 relative flex-wrap-reverse gap-4">
+  <div
+    class="relative mb-4 flex flex-wrap-reverse items-center justify-between gap-4"
+  >
     <h1 class="text-3xl">{hookName}</h1>
-    <button data-action="showDownloadOptions" class="bg-ctp-blue hover:bg-ctp-pink text-ctp-base py-2 px-4 rounded-lg inline-flex items-center transition-all shadow hover:shadow-lg ml-auto">
+    <button
+      data-action="showDownloadOptions"
+      class="ml-auto inline-flex items-center rounded-lg bg-ctp-blue px-4 py-2 text-ctp-base shadow transition-all hover:bg-ctp-pink hover:shadow-lg"
+    >
       <span>Get this hook</span>
-      <ExpandIcon class="h-6 w-6 fill-current ml-2" />
+      <ExpandIcon class="ml-2 h-6 w-6 fill-current" />
     </button>
-    <div data-container="downloadOptions" class="absolute top-11 right-0 hidden flex-col items-stretch justify-stretch bg-ctp-surface1 w-full lg:w-[500px] p-4 rounded-lg z-30 shadow-lg">
-      <div class="pb-4 mb-2 border-b-ctp-surface2 border-b">
+    <div
+      data-container="downloadOptions"
+      class="absolute right-0 top-11 z-30 hidden w-full flex-col items-stretch justify-stretch rounded-lg bg-ctp-surface1 p-4 shadow-lg lg:w-[500px]"
+    >
+      <div class="mb-2 border-b border-b-ctp-surface2 pb-4">
         <DownloadCommand hookName={hookName} />
       </div>
       <div>
-        <button data-action="copy" class="hover:bg-ctp-surface2 text-ctp-text p-2 rounded-lg inline-flex items-center transition-all w-full active:bg-ctp-green active:text-ctp-base">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" class="h-6 w-6 fill-current mr-4">
-              <rect width="256" height="256" fill="none"/>
-              <polyline points="168 168 216 168 216 40 88 40 88 88" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
-              <rect x="40" y="88" width="128" height="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
+        <button
+          data-action="copy"
+          class="inline-flex w-full items-center rounded-lg p-2 text-ctp-text transition-all hover:bg-ctp-surface2 active:bg-ctp-green active:text-ctp-base"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 256 256"
+            class="mr-4 h-6 w-6 fill-current"
+          >
+            <rect width="256" height="256" fill="none"></rect>
+            <polyline
+              points="168 168 216 168 216 40 88 40 88 88"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="16"></polyline>
+            <rect
+              x="40"
+              y="88"
+              width="128"
+              height="128"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="16"></rect>
           </svg>
           <span>Copy file</span>
         </button>
       </div>
       <div>
-        <button data-action="download" class="hover:bg-ctp-surface2 text-ctp-text p-2 rounded-lg inline-flex items-center transition-all w-full">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" class="h-6 w-6 fill-current mr-4">
-              <rect width="256" height="256" fill="none"/>
-              <path d="M200,224H56a8,8,0,0,1-8-8V40a8,8,0,0,1,8-8h96l56,56V216A8,8,0,0,1,200,224Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
-              <polyline points="152 32 152 88 208 88" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
-              <line x1="128" y1="120" x2="128" y2="184" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
-              <polyline points="104 160 128 184 152 160" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
+        <button
+          data-action="download"
+          class="inline-flex w-full items-center rounded-lg p-2 text-ctp-text transition-all hover:bg-ctp-surface2"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 256 256"
+            class="mr-4 h-6 w-6 fill-current"
+          >
+            <rect width="256" height="256" fill="none"></rect>
+            <path
+              d="M200,224H56a8,8,0,0,1-8-8V40a8,8,0,0,1,8-8h96l56,56V216A8,8,0,0,1,200,224Z"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="16"></path>
+            <polyline
+              points="152 32 152 88 208 88"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="16"></polyline>
+            <line
+              x1="128"
+              y1="120"
+              x2="128"
+              y2="184"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="16"></line>
+            <polyline
+              points="104 160 128 184 152 160"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="16"></polyline>
           </svg>
           <span>Download file</span>
         </button>
       </div>
-      </div>
     </div>
   </div>
-  <p class="mb-6">{doc.description}</p>
-{requiredPackages.length > 0 && (
+</DocsLayout>
+<p class="mb-6">{doc.description}</p>
+{
+  requiredPackages.length > 0 && (
     <AlertBox>
-    <div slot="icon">
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-current" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><circle cx="128" cy="128" r="96" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="16"/><line x1="128" y1="136" x2="128" y2="80" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><circle cx="128" cy="172" r="12"/></svg>
-    </div>
-    <div slot="title">
-      This hook requires the following packages:
-      <span class="text-ctp-crust font-semibold">
-        {requiredPackages.map(requiredPackages => (
-          <a href={`https://www.npmjs.com/package/${requiredPackages.description}`} class="mr-1 text-ctp-crust font-semibold hover:underline" target="_blank">{requiredPackages.description}</a>
-        ))}
-      </span>
-    </div>
-    <div class="mt-4">
-      <PackageCommand packageNames={requiredPackages.map(p => p.description ?? "")} />
-    </div>
+      <div slot="icon">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6 fill-current"
+          viewBox="0 0 256 256"
+        >
+          <>
+            <rect width="256" height="256" fill="none" />
+            <circle
+              cx="128"
+              cy="128"
+              r="96"
+              fill="none"
+              stroke="currentColor"
+              stroke-miterlimit="10"
+              stroke-width="16"
+            />
+            <line
+              x1="128"
+              y1="136"
+              x2="128"
+              y2="80"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="16"
+            />
+            <circle cx="128" cy="172" r="12" />
+          </>
+        </svg>
+      </div>
+      <div slot="title">
+        This hook requires the following packages:
+        <span class="font-semibold text-ctp-crust">
+          {requiredPackages.map((requiredPackages) => (
+            <a
+              href={`https://www.npmjs.com/package/${requiredPackages.description}`}
+              class="mr-1 font-semibold text-ctp-crust hover:underline"
+              target="_blank"
+            >
+              {requiredPackages.description}
+            </a>
+          ))}
+        </span>
+      </div>
+      <div class="mt-4">
+        <PackageCommand
+          packageNames={requiredPackages.map((p) => p.description ?? "")}
+        />
+      </div>
     </AlertBox>
-)}
-  {requiredLocals.length > 0 && (
+  )
+}
+{
+  requiredLocals.length > 0 && (
     <AlertBox>
-    <div slot="icon">
-    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-current" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><circle cx="128" cy="128" r="96" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="16"/><line x1="128" y1="136" x2  ="128" y2="80" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><circle cx="128" cy="172" r="12"/></svg>
-    </div>
-    <div slot="title">
-      This hook requires the following hooks:
-      <span class="text-ctp-crust font-semibold">
-        {requiredLocals.map(requiredLocals => (
-          <a href={`/docs/${requiredLocals.description}`} class="mr-1 text-ctp-crust font-semibold hover:underline" target="_blank">{requiredLocals.description?.split("./")[1]}</a>
-        ))}
-      </span>
-    </div>
+      <div slot="icon">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6 fill-current"
+          viewBox="0 0 256 256"
+        >
+          <>
+            <rect width="256" height="256" fill="none" />
+            <circle
+              cx="128"
+              cy="128"
+              r="96"
+              fill="none"
+              stroke="currentColor"
+              stroke-miterlimit="10"
+              stroke-width="16"
+            />
+            <line
+              x1="128"
+              y1="136"
+              x2="128"
+              y2="80"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="16"
+            />
+            <circle cx="128" cy="172" r="12" />
+          </>
+        </svg>
+      </div>
+      <div slot="title">
+        This hook requires the following hooks:
+        <span class="font-semibold text-ctp-crust">
+          {requiredLocals.map((requiredLocals) => (
+            <a
+              href={`/docs/${requiredLocals.description}`}
+              class="mr-1 font-semibold text-ctp-crust hover:underline"
+              target="_blank"
+            >
+              {requiredLocals.description?.split("./")[1]}
+            </a>
+          ))}
+        </span>
+      </div>
     </AlertBox>
-)}
+  )
+}
 
-  {example && (
+{
+  example && (
     <section class="mt-12">
-      <h2 class="text-2xl mb-4">Example</h2>
-      <div class="flex flex-row flex-wrap ctp-frappe">
-        <input id="tab-demo" type="radio" name="demo-tabs" class="peer/tab-demo opacity-0 absolute" checked />
-        <label for="tab-demo" class="peer-checked/tab-demo:bg-ctp-base bg-ctp-surface1 text-ctp-text cursor-pointer p-2 px-4 rounded-t-lg flex flex-row items-stretch gap-2">
+      <h2 class="mb-4 text-2xl">Example</h2>
+      <div class="ctp-frappe flex flex-row flex-wrap">
+        <input
+          id="tab-demo"
+          type="radio"
+          name="demo-tabs"
+          class="peer/tab-demo absolute opacity-0"
+          checked
+        />
+        <label
+          for="tab-demo"
+          class="flex cursor-pointer flex-row items-stretch gap-2 rounded-t-lg bg-ctp-surface1 p-2 px-4 text-ctp-text peer-checked/tab-demo:bg-ctp-base"
+        >
           Demo
         </label>
 
-        <input id="tab-code" type="radio" name="demo-tabs" class="peer/tab-code opacity-0 absolute" />
-        <label for="tab-code" class="peer-checked/tab-code:bg-ctp-base bg-ctp-surface1 text-ctp-text cursor-pointer p-2 px-4 rounded-t-lg flex flex-row items-stretch gap-2">
+        <input
+          id="tab-code"
+          type="radio"
+          name="demo-tabs"
+          class="peer/tab-code absolute opacity-0"
+        />
+        <label
+          for="tab-code"
+          class="flex cursor-pointer flex-row items-stretch gap-2 rounded-t-lg bg-ctp-surface1 p-2 px-4 text-ctp-text peer-checked/tab-code:bg-ctp-base"
+        >
           Code
         </label>
 
-        <div class="basis-full h-0"></div>
+        <div class="h-0 basis-full" />
 
-        <div class="hidden peer-checked/tab-demo:block w-full">
-          <Example name={hookName} client:only className="rounded-xl shadow-xl rounded-tl-none" />
+        <div class="hidden w-full peer-checked/tab-demo:block">
+          <Example
+            name={hookName}
+            client:only
+            className="rounded-xl shadow-xl rounded-tl-none"
+          />
         </div>
-        <div class="hidden peer-checked/tab-code:block w-full">
-          <CodeBox code={example.trim()} lang="tsx" class="rounded-xl shadow-xl rounded-tl-none" />
+        <div class="hidden w-full peer-checked/tab-code:block">
+          <CodeBox
+            code={example.trim()}
+            lang="tsx"
+            class="rounded-xl rounded-tl-none shadow-xl"
+          />
         </div>
       </div>
     </section>
-  )}
+  )
+}
 
-  <section class="mt-12">
-  <h2 class="text-2xl mb-4">Code</h2>
+<section class="mt-12">
+  <h2 class="mb-4 text-2xl">Code</h2>
 
   <CodeBox code={hook.trim()} lang="ts" class="rounded-xl shadow-xl" />
-  </section>
+</section>
 
 <script is:inline define:vars={{ hookName, hook }}>
   // Download button
   const downloadButtons = document.querySelectorAll('[data-action="download"]');
-  downloadButtons.forEach(downloadButton => {
-    downloadButton.addEventListener('click', () => {
-      const blob = new Blob([hook.trim()], { type: 'text/plain' }); 
+  downloadButtons.forEach((downloadButton) => {
+    downloadButton.addEventListener("click", () => {
+      const blob = new Blob([hook.trim()], { type: "text/plain" });
       const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
+      const a = document.createElement("a");
       a.href = url;
       a.download = `${hookName}.ts`;
       a.click();
@@ -150,39 +329,43 @@ const requiredLocals = doc.tags.filter((el) => el.tag === "requires" && el.type 
 
   // Copy button
   const copyButtons = document.querySelectorAll('[data-action="copy"]');
-  copyButtons.forEach(copyButton => {
-    copyButton.addEventListener('click', () => {
+  copyButtons.forEach((copyButton) => {
+    copyButton.addEventListener("click", () => {
       navigator.clipboard.writeText(hook.trim());
     });
   });
 
   function hideDownloadOptions() {
-    downloadOptionsContainer.classList.remove('flex');
-    downloadOptionsContainer.classList.add('hidden');
-    downloadOptionsContainer.classList.remove('animate-fade-in-down');
+    downloadOptionsContainer.classList.remove("flex");
+    downloadOptionsContainer.classList.add("hidden");
+    downloadOptionsContainer.classList.remove("animate-fade-in-down");
   }
 
   // Show download options
-  const downloadOptionsContainer = document.querySelector('[data-container="downloadOptions"]');
-  const showDownloadOptionsButton = document.querySelector('[data-action="showDownloadOptions"]');
-  showDownloadOptionsButton.addEventListener('click', () => {
-    if (downloadOptionsContainer.classList.contains('hidden')) {
-    downloadOptionsContainer.classList.remove('hidden');
-    downloadOptionsContainer.classList.add('flex')
-    downloadOptionsContainer.classList.add('animate-fade-in-down');
+  const downloadOptionsContainer = document.querySelector(
+    '[data-container="downloadOptions"]',
+  );
+  const showDownloadOptionsButton = document.querySelector(
+    '[data-action="showDownloadOptions"]',
+  );
+  showDownloadOptionsButton.addEventListener("click", () => {
+    if (downloadOptionsContainer.classList.contains("hidden")) {
+      downloadOptionsContainer.classList.remove("hidden");
+      downloadOptionsContainer.classList.add("flex");
+      downloadOptionsContainer.classList.add("animate-fade-in-down");
     } else {
       hideDownloadOptions();
     }
   });
 
   // Hide download options on click outside
-  document.addEventListener('click', (e) => {
-    if (!showDownloadOptionsButton.contains(e.target) && !downloadOptionsContainer.contains(e.target) && downloadOptionsContainer.classList.contains('flex')) {
+  document.addEventListener("click", (e) => {
+    if (
+      !showDownloadOptionsButton.contains(e.target) &&
+      !downloadOptionsContainer.contains(e.target) &&
+      downloadOptionsContainer.classList.contains("flex")
+    ) {
       hideDownloadOptions();
     }
   });
 </script>
-
-
-</DocsLayout>
-

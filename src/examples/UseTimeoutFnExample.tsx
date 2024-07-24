@@ -12,13 +12,13 @@ export default function UseTimeoutFnExample() {
       <p>Count incremented by timeout: {count}</p>
       <div className="flex gap-4 py-4">
         <button
-          className="bg-ctp-blue text-ctp-base px-4 py-2 rounded"
+          className="rounded bg-ctp-blue px-4 py-2 text-ctp-base"
           onClick={set}
         >
           Increment after 1 second
         </button>
         <button
-          className="bg-ctp-red text-ctp-base px-4 py-2 rounded"
+          className="rounded bg-ctp-red px-4 py-2 text-ctp-base"
           onClick={clear}
         >
           Cancel increment

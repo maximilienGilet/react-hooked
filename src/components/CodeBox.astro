@@ -1,6 +1,10 @@
 ---
-import { Code } from 'astro:components';
-import type { LanguageRegistration, SpecialLanguage, BundledLanguage } from 'shiki';
+import { Code } from "astro:components";
+import type {
+  LanguageRegistration,
+  SpecialLanguage,
+  BundledLanguage,
+} from "shiki";
 
 interface Props {
   code: string;
@@ -8,49 +12,100 @@ interface Props {
   class?: string;
 }
 
-const {code, lang, class: className} = Astro.props;
-
+const { code, lang, class: className } = Astro.props;
 ---
 
-<div class="relative ctp-frappe">
-  <Code code={code} lang={lang ?? "ts"} theme="catppuccin-frappe" class={className} />
-  <button title="Copy" data-copy="action" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 z-20 text-zinc-50 bg-ctp-base/90 hover:bg-ctp-surface0 hover:text-zinc-50 [&amp;_svg]:size-3 absolute right-2 top-2 p-3">
+<div class="ctp-frappe relative">
+  <Code
+    code={code}
+    lang={lang ?? "ts"}
+    theme="catppuccin-frappe"
+    class={className}
+  />
+  <button
+    title="Copy"
+    data-copy="action"
+    class="focus-visible:ring-ring absolute right-2 top-2 z-20 inline-flex items-center justify-center whitespace-nowrap rounded-md bg-ctp-base/90 p-3 text-sm font-medium text-zinc-50 transition-colors hover:bg-ctp-surface0 hover:text-zinc-50 focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-3"
+  >
     <span class="sr-only">Copy</span>
-    <svg data-copy="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" class="fill-current w-4 h-4">
-      <rect width="256" height="256" fill="none"/>
-      <polyline points="168 168 216 168 216 40 88 40 88 88" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
-      <rect x="40" y="88" width="128" height="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
+    <svg
+      data-copy="icon"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 256 256"
+      class="h-4 w-4 fill-current"
+    >
+      <rect width="256" height="256" fill="none"></rect>
+      <polyline
+        points="168 168 216 168 216 40 88 40 88 88"
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="16"></polyline>
+      <rect
+        x="40"
+        y="88"
+        width="128"
+        height="128"
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="16"></rect>
     </svg>
-    <svg data-copy="copied-text" class="hidden h-4 fill-current text-ctp-green" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
-      <rect width="256" height="256" fill="none"/>
-      <polyline points="88 136 112 160 168 104" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
-      <circle cx="128" cy="128" r="96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
+    <svg
+      data-copy="copied-text"
+      class="hidden h-4 fill-current text-ctp-green"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 256 256"
+    >
+      <rect width="256" height="256" fill="none"></rect>
+      <polyline
+        points="88 136 112 160 168 104"
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="16"></polyline>
+      <circle
+        cx="128"
+        cy="128"
+        r="96"
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="16"></circle>
     </svg>
   </button>
 </div>
 
 <script>
-
   function setupCopyButtons() {
     const copyButtons = document.querySelectorAll('[data-copy="action"]');
-    copyButtons?.forEach(copyButton => {
-      copyButton?.addEventListener('click', () => {
-        const copiedText = copyButton?.parentElement?.querySelector('[data-copy="copied-text"]');
-        const copyIcon = copyButton?.parentElement?.querySelector('[data-copy="icon"]');
-        navigator.clipboard.writeText(copyButton?.parentElement?.getElementsByTagName('code')[0].innerText ?? '');
-        copiedText?.classList.remove('hidden');
-        copyIcon?.classList.add('hidden');
+    copyButtons?.forEach((copyButton) => {
+      copyButton?.addEventListener("click", () => {
+        const copiedText = copyButton?.parentElement?.querySelector(
+          '[data-copy="copied-text"]',
+        );
+        const copyIcon =
+          copyButton?.parentElement?.querySelector('[data-copy="icon"]');
+        navigator.clipboard.writeText(
+          copyButton?.parentElement?.getElementsByTagName("code")[0]
+            .innerText ?? "",
+        );
+        copiedText?.classList.remove("hidden");
+        copyIcon?.classList.add("hidden");
         setTimeout(() => {
-          copiedText?.classList.add('hidden');
-          copyButton?.classList.remove('bg-ctp-green');
-          copyIcon?.classList.remove('hidden');
+          copiedText?.classList.add("hidden");
+          copyButton?.classList.remove("bg-ctp-green");
+          copyIcon?.classList.remove("hidden");
         }, 2000);
       });
     });
   }
 
   setupCopyButtons();
-
 
   document.addEventListener("astro:after-swap", () => {
     setupCopyButtons();

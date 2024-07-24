@@ -1,33 +1,57 @@
 ---
-import CodeBox from '@/components/CodeBox.astro';
+import CodeBox from "@/components/CodeBox.astro";
 
 interface Props {
   hookName: string;
 }
 
-const site = import.meta.env.SITE
+const site = import.meta.env.SITE;
 
-const {hookName} = Astro.props;
+const { hookName } = Astro.props;
 ---
 
-<section class="flex flex-row flex-wrap ctp-frappe">
-  <input id="tab-curl" type="radio" name="download-tabs" class="peer/tab-curl opacity-0 absolute" checked />
-  <label for="tab-curl" class="peer-checked/tab-curl:bg-ctp-base bg-ctp-surface1 text-ctp-text cursor-pointer p-2 px-4 rounded-t-lg flex flex-row items-stretch gap-2">
+<section class="ctp-frappe flex flex-row flex-wrap">
+  <input
+    id="tab-curl"
+    type="radio"
+    name="download-tabs"
+    class="peer/tab-curl absolute opacity-0"
+    checked
+  />
+  <label
+    for="tab-curl"
+    class="flex cursor-pointer flex-row items-stretch gap-2 rounded-t-lg bg-ctp-surface1 p-2 px-4 text-ctp-text peer-checked/tab-curl:bg-ctp-base"
+  >
     cURL
   </label>
 
-  <input id="tab-wget" type="radio" name="download-tabs" class="peer/tab-wget opacity-0 absolute" />
-  <label for="tab-wget" class="peer-checked/tab-wget:bg-ctp-base bg-ctp-surface1 text-ctp-text cursor-pointer p-2 px-4 rounded-t-lg flex flex-row items-stretch gap-2">
+  <input
+    id="tab-wget"
+    type="radio"
+    name="download-tabs"
+    class="peer/tab-wget absolute opacity-0"
+  />
+  <label
+    for="tab-wget"
+    class="flex cursor-pointer flex-row items-stretch gap-2 rounded-t-lg bg-ctp-surface1 p-2 px-4 text-ctp-text peer-checked/tab-wget:bg-ctp-base"
+  >
     wget
   </label>
 
-  <div class="basis-full h-0"></div>
+  <div class="h-0 basis-full"></div>
 
-  <div class="hidden peer-checked/tab-curl:block w-full">
-    <CodeBox code={`curl ${site}/raw/${hookName}.ts --output src/hooks/${hookName}.ts`} lang="bash" class="rounded-lg rounded-tl-none" />
+  <div class="hidden w-full peer-checked/tab-curl:block">
+    <CodeBox
+      code={`curl ${site}/raw/${hookName}.ts --output src/hooks/${hookName}.ts`}
+      lang="bash"
+      class="rounded-lg rounded-tl-none"
+    />
   </div>
-  <div class="hidden peer-checked/tab-wget:block w-full">
-    <CodeBox code={`wget --output-document src/hooks/${hookName}.ts ${site}/raw/${hookName}.ts`} lang="bash" class="rounded-lg rounded-tl-none" />
+  <div class="hidden w-full peer-checked/tab-wget:block">
+    <CodeBox
+      code={`wget --output-document src/hooks/${hookName}.ts ${site}/raw/${hookName}.ts`}
+      lang="bash"
+      class="rounded-lg rounded-tl-none"
+    />
   </div>
-
 </section>

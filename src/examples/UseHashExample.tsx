@@ -9,13 +9,13 @@ export default function UseHashExample() {
       <p>The hash is {hash || "empty"}.</p>
       <div className="flex flex-row items-center justify-center gap-4 p-4">
         <button
-          className="bg-ctp-green text-ctp-base py-2 px-4 rounded"
+          className="rounded bg-ctp-green px-4 py-2 text-ctp-base"
           onClick={() => setHash("hello")}
         >
           Set Hash to hello
         </button>
         <button
-          className="bg-ctp-red text-ctp-base py-2 px-4 rounded"
+          className="rounded bg-ctp-red px-4 py-2 text-ctp-base"
           onClick={() => setHash("")}
         >
           Clear Hash

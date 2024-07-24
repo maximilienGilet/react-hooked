@@ -8,18 +8,18 @@ export default function UseBeforeUnloadExample() {
   return (
     <div className="flex flex-col items-center justify-center gap-4 p-4">
       <p className="text-ctp-text">{isEnabled ? "Enabled" : "Disabled"}</p>
-      <a href="https://example.com" className="underline text-ctp-blue">
+      <a href="https://example.com" className="text-ctp-blue underline">
         Quit this page
       </a>
       <div className="flex flex-row items-center justify-center gap-4 p-4">
         <button
-          className="bg-ctp-green text-ctp-base py-2 px-4 rounded"
+          className="rounded bg-ctp-green px-4 py-2 text-ctp-base"
           onClick={() => setIsEnabled(true)}
         >
           Enable
         </button>
         <button
-          className="bg-ctp-red text-ctp-base py-2 px-4 rounded"
+          className="rounded bg-ctp-red px-4 py-2 text-ctp-base"
           onClick={() => setIsEnabled(false)}
         >
           Disable

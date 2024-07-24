@@ -9,31 +9,31 @@ export default function UseListExample() {
     <div className="text-ctp-text">
       <div className="flex gap-4">
         <button
-          className="bg-ctp-blue text-ctp-base px-4 py-2 rounded"
+          className="rounded bg-ctp-blue px-4 py-2 text-ctp-base"
           onClick={() => push(4)}
         >
           Push 4
         </button>
         <button
-          className="bg-ctp-blue text-ctp-base px-4 py-2 rounded"
+          className="rounded bg-ctp-blue px-4 py-2 text-ctp-base"
           onClick={() => removeAt(1)}
         >
           Remove at 1
         </button>
         <button
-          className="bg-ctp-blue text-ctp-base px-4 py-2 rounded"
+          className="rounded bg-ctp-blue px-4 py-2 text-ctp-base"
           onClick={() => insertAt(4, 1)}
         >
           Insert at 1 4
         </button>
         <button
-          className="bg-ctp-blue text-ctp-base px-4 py-2 rounded"
+          className="rounded bg-ctp-blue px-4 py-2 text-ctp-base"
           onClick={() => updateAt(4, 1)}
         >
           Update at 1 to 4
         </button>
         <button
-          className="bg-ctp-blue text-ctp-base px-4 py-2 rounded"
+          className="rounded bg-ctp-blue px-4 py-2 text-ctp-base"
           onClick={() => clear()}
         >
           Clear

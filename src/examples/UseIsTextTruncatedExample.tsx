@@ -14,7 +14,7 @@ export default function UseIsTextTruncated() {
         <p>
           <b>Is Text Truncated:</b> {itsTruncatedValue ? "Yes" : "No"}
         </p>
-        <div className="w-40 h-10 overflow-hidden whitespace-nowrap">
+        <div className="h-10 w-40 overflow-hidden whitespace-nowrap">
           <p className="truncate" ref={refOfValue}>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
             quas, quos, quae, quia quidem quibusdam

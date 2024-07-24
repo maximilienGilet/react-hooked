@@ -38,11 +38,11 @@ export default function UseBatteryExample() {
   return (
     <div className="flex items-center justify-start">
       <div className="w-48">
-        <div className="shadow w-1/2 rounded border-2 flex my-1 relative border-ctp-surface2">
-          <div className="border-r-8 h-6 rounded-r absolute flex ml-24 mt-2 z-10 border-ctp-surface2"></div>
+        <div className="relative my-1 flex w-1/2 rounded border-2 border-ctp-surface2 shadow">
+          <div className="absolute z-10 ml-24 mt-2 flex h-6 rounded-r border-r-8 border-ctp-surface2"></div>
           <div
             className={clsx(
-              "cursor-default text-xs font-bold leading-none flex items-center justify-center m-1 py-4 text-center",
+              "m-1 flex cursor-default items-center justify-center py-4 text-center text-xs font-bold leading-none",
               getLevelColor(),
             )}
             style={{ width: `${level * 100}%` }}

@@ -21,13 +21,13 @@ export default function UseDebounceExample() {
         specified delay, or null if the delay has not yet started.
       </p>
       <input
-        className="bg-ctp-surface1 p-2 rounded"
+        className="rounded bg-ctp-surface1 p-2"
         value={value}
         onChange={(e) => setValue(e.target.value)}
         placeholder="Type something..."
       />
       <button
-        className="bg-ctp-blue text-ctp-base py-2 px-4 rounded"
+        className="rounded bg-ctp-blue px-4 py-2 text-ctp-base"
         onClick={() => cancel()}
       >
         Cancel

@@ -10,29 +10,29 @@ export default function UseBooleanExample() {
         The value is &nbsp;
         <span
           className={clsx(
-            "p-2 rounded text-ctp-base",
+            "rounded p-2 text-ctp-base",
             value ? "bg-ctp-green" : "bg-ctp-red",
           )}
         >
           {value ? "true" : "false"}
         </span>
       </div>
-      <div className="flex gap-2 mt-6">
+      <div className="mt-6 flex gap-2">
         <button
           onClick={setTrue}
-          className="bg-ctp-green text-ctp-base px-4 py-2 rounded"
+          className="rounded bg-ctp-green px-4 py-2 text-ctp-base"
         >
           Set to true
         </button>
         <button
           onClick={setFalse}
-          className="bg-ctp-red text-ctp-base px-4 py-2 rounded"
+          className="rounded bg-ctp-red px-4 py-2 text-ctp-base"
         >
           Set to false
         </button>
         <button
           onClick={toggle}
-          className="bg-ctp-text text-ctp-base px-4 py-2 rounded"
+          className="rounded bg-ctp-text px-4 py-2 text-ctp-base"
         >
           Toggle
         </button>

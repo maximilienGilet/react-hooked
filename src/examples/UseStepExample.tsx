@@ -14,7 +14,7 @@ export default function UseStepExample() {
   } = helpers;
 
   return (
-    <div className="flex flex-col gap-4 justify-center items-center text-ctp-text">
+    <div className="flex flex-col items-center justify-center gap-4 text-ctp-text">
       <p>
         Current step is <strong>{currentStep}</strong>
       </p>
@@ -23,7 +23,7 @@ export default function UseStepExample() {
           Can go to previous step{" "}
           <span
             className={clsx(
-              "p-2 text-ctp-base rounded",
+              "rounded p-2 text-ctp-base",
               canGoToPrevStep ? "bg-ctp-green" : "bg-ctp-red",
             )}
           >
@@ -34,7 +34,7 @@ export default function UseStepExample() {
           Can go to next step{" "}
           <span
             className={clsx(
-              "p-2 text-ctp-base rounded",
+              "rounded p-2 text-ctp-base",
               canGoToNextStep ? "bg-ctp-green" : "bg-ctp-red",
             )}
           >
@@ -44,25 +44,25 @@ export default function UseStepExample() {
       </div>
       <div className="flex gap-4">
         <button
-          className="bg-ctp-blue text-ctp-base px-4 py-2 rounded"
+          className="rounded bg-ctp-blue px-4 py-2 text-ctp-base"
           onClick={goToNextStep}
         >
           Go to next step
         </button>
         <button
-          className="bg-ctp-pink text-ctp-base px-4 py-2 rounded"
+          className="rounded bg-ctp-pink px-4 py-2 text-ctp-base"
           onClick={goToPrevStep}
         >
           Go to previous step
         </button>
         <button
-          className="bg-ctp-red text-ctp-base px-4 py-2 rounded"
+          className="rounded bg-ctp-red px-4 py-2 text-ctp-base"
           onClick={reset}
         >
           Reset
         </button>
         <button
-          className="bg-ctp-yellow text-ctp-base px-4 py-2 rounded"
+          className="rounded bg-ctp-yellow px-4 py-2 text-ctp-base"
           onClick={() => {
             setStep(3);
           }}
