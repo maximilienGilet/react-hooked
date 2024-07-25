@@ -22,13 +22,13 @@ export default function UseListExample() {
         </button>
         <button
           className="rounded bg-ctp-blue px-4 py-2 text-ctp-base"
-          onClick={() => insertAt(4, 1)}
+          onClick={() => insertAt( 1,4)}
         >
           Insert at 1 4
         </button>
         <button
           className="rounded bg-ctp-blue px-4 py-2 text-ctp-base"
-          onClick={() => updateAt(4, 1)}
+          onClick={() => updateAt(1,4)}
         >
           Update at 1 to 4
         </button>
