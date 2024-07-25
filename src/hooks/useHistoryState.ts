@@ -55,6 +55,7 @@ export default function useHistoryState<T>(
   const historyClear = useCallback(() => {
     historyRef.current = [];
     forceUpdate((prev) => prev + 1);
+    setState(initialState)
   }, [historyRef, forceUpdate]);
 
   const setStateCallback = useCallback(
