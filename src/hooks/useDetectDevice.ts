@@ -1,12 +1,5 @@
 import { useState, useEffect } from "react";
-
-export interface DeviceState {
-  isSupported: boolean;
-  deviceType: "Mobile" | "Tablet" | "Desktop";
-  isMobile: boolean;
-  isTablet: boolean;
-  isDesktop: boolean;
-}
+import type { DeviceState } from "../types/DeviceState";
 
 /**
  * React hook that returns the type of device the code is running on.
