@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import type { DeviceState } from "../types/DeviceState";
+import type { DeviceState } from "../types/deviceState";
 
 /**
  * React hook that returns the type of device the code is running on.
