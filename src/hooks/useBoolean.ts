@@ -3,11 +3,11 @@ import { useCallback, useState } from "react";
 import type { Dispatch, SetStateAction } from "react";
 
 type UseBooleanReturn = {
-  value: boolean;
-  setValue: Dispatch<SetStateAction<boolean>>;
-  setTrue: () => void;
-  setFalse: () => void;
-  toggle: () => void;
+	value: boolean;
+	setValue: Dispatch<SetStateAction<boolean>>;
+	setTrue: () => void;
+	setFalse: () => void;
+	toggle: () => void;
 };
 
 /**
@@ -21,22 +21,22 @@ type UseBooleanReturn = {
  * 5. toggle - A function to toggle the value.
  */
 export default function useBoolean(defaultValue?: boolean): UseBooleanReturn {
-  if (typeof defaultValue !== "boolean") {
-    throw new Error("defaultValue must be `true` or `false`");
-  }
-  const [value, setValue] = useState(defaultValue);
+	if (typeof defaultValue !== "boolean") {
+		throw new Error("defaultValue must be `true` or `false`");
+	}
+	const [value, setValue] = useState(defaultValue);
 
-  const setTrue = useCallback(() => {
-    setValue(true);
-  }, []);
+	const setTrue = useCallback(() => {
+		setValue(true);
+	}, []);
 
-  const setFalse = useCallback(() => {
-    setValue(false);
-  }, []);
+	const setFalse = useCallback(() => {
+		setValue(false);
+	}, []);
 
-  const toggle = useCallback(() => {
-    setValue((x) => !x);
-  }, []);
+	const toggle = useCallback(() => {
+		setValue((x) => !x);
+	}, []);
 
-  return { value, setValue, setTrue, setFalse, toggle };
+	return { value, setValue, setTrue, setFalse, toggle };
 }
