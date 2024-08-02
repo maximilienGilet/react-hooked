@@ -9,6 +9,7 @@ import type { Hook } from "@/types/hook";
 interface Props {
   title: string;
   selectedPage: string;
+  description?: string;
 }
 
 const hookNames = getHooksNames();
@@ -19,7 +20,7 @@ const hooks: Hook[] = hookNames.map((name) => ({
   isTested: testNames.includes(name),
 }));
 
-const { title, selectedPage } = Astro.props;
+const { title, selectedPage, description } = Astro.props;
 ---
 
 <html lang="en">
@@ -29,6 +30,7 @@ const { title, selectedPage } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="stylesheet" href="/style.css" />
     <title>{title} - React Hooked 🪝</title>
+    {description && <meta name="description" content={description} />}
     <ViewTransitions />
   </head>
   <body class="ctp-latte bg-ctp-base text-ctp-text antialiased dark:ctp-mocha">

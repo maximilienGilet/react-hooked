@@ -47,7 +47,11 @@ const requiredLocals = doc.tags.filter(
 );
 ---
 
-<DocsLayout title={hookName} selectedPage={hookName}>
+<DocsLayout
+  title={hookName}
+  selectedPage={hookName}
+  description={`${hookName} ${doc.description ? "- " + doc.description : ""} - Copy this hook to your project`}
+>
   <div
     class="relative mb-4 flex flex-wrap-reverse items-center justify-between gap-4"
   >
