@@ -8,6 +8,17 @@ interface Props {
 }
 
 const { items, selectedPage } = Astro.props;
+
+interface DocsPage {
+  title: string;
+  href: string;
+  id: string;
+}
+
+const docsPages: DocsPage[] = [
+  { title: "Getting started", href: "/docs", id: "docs" },
+  { title: "Testing", href: "/docs/tests", id: "testing" },
+];
 ---
 
 <nav
@@ -15,15 +26,21 @@ const { items, selectedPage } = Astro.props;
   class="sticky top-16 hidden max-h-[calc(100dvh-theme(spacing.16))] w-52 shrink-0 overflow-y-auto pb-16 pt-12 lg:block"
 >
   <ul role="list">
-    <li>
-      <a
-        class={cn(
-          "flex items-center gap-x-3 py-1.5  font-medium hover:underline",
-          selectedPage === "docs" && "text-ctp-blue",
-        )}
-        href="/docs">Getting started</a
-      >
-    </li>
+    {
+      docsPages.map((page) => (
+        <li>
+          <a
+            class={cn(
+              "flex items-center gap-x-3 py-1.5 font-medium hover:underline",
+              selectedPage === page.id && "text-ctp-blue",
+            )}
+            href={page.href}
+          >
+            {page.title}
+          </a>
+        </li>
+      ))
+    }
     <li class="mt-6">
       <div class="text-lg font-semibold">Hooks</div>
       <ul role="list" class="mt-4">
