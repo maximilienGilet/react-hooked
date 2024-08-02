@@ -1,14 +1,10 @@
 import type { APIRoute } from "astro";
 
-import { extractHookFileName } from "@/utils/hooks";
+import { extractHookFileName, getHooks } from "@/utils/hooks";
 
 export const GET: APIRoute = ({ params }) => {
   const hookName = params.hook;
-  const hooks: Record<string, string> = import.meta.glob("/src/hooks/*.ts", {
-    query: "?raw",
-    eager: true,
-    import: "default",
-  });
+  const hooks = getHooks();
 
   const hook = Object.entries(hooks).find(
     ([key]) => extractHookFileName(key) === hookName,
@@ -18,11 +14,7 @@ export const GET: APIRoute = ({ params }) => {
 };
 
 export async function getStaticPaths() {
-  const hooks: Record<string, string> = import.meta.glob("/src/hooks/*.ts", {
-    query: "?raw",
-    eager: true,
-    import: "default",
-  });
+  const hooks = getHooks();
   return Object.keys(hooks).map((hook) => {
     const hookName = extractHookFileName(hook);
     return {
