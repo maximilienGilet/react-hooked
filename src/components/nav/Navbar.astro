@@ -1,13 +1,14 @@
 ---
 import NavItem from "@/components/nav/NavItem.astro";
+import type { Hook } from "@/types/hook";
 import { cn } from "@/utils/cn";
 
 interface Props {
-  items: string[];
+  hooks: Hook[];
   selectedPage: string;
 }
 
-const { items, selectedPage } = Astro.props;
+const { hooks, selectedPage } = Astro.props;
 
 interface DocsPage {
   title: string;
@@ -23,7 +24,7 @@ const docsPages: DocsPage[] = [
 
 <nav
   id="nav-list"
-  class="sticky top-16 hidden max-h-[calc(100dvh-theme(spacing.16))] w-52 shrink-0 overflow-y-auto pb-16 pt-12 lg:block"
+  class="sticky top-16 hidden max-h-[calc(100dvh-theme(spacing.16))] w-64 shrink-0 overflow-y-auto pb-16 pt-12 lg:block"
 >
   <ul role="list">
     {
@@ -45,11 +46,12 @@ const docsPages: DocsPage[] = [
       <div class="text-lg font-semibold">Hooks</div>
       <ul role="list" class="mt-4">
         {
-          items.map((item: string) => (
+          hooks.map((hook: Hook) => (
             <NavItem
-              text={item}
-              href={`/docs/${item}`}
-              isSelected={item === selectedPage}
+              text={hook.name}
+              href={`/docs/${hook.name}`}
+              isSelected={hook.name === selectedPage}
+              isTested={hook.isTested}
             />
           ))
         }

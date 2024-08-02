@@ -1,25 +1,28 @@
 ---
 import { cn } from "@/utils/cn";
+import FlaskIcon from "@/components/icons/FlaskIcon.astro";
 interface Props {
   href: string;
   text: string;
   isSelected?: boolean;
   isNew?: boolean;
+  isTested?: boolean;
 }
 
-const { href, text, isNew, isSelected } = Astro.props;
+const { href, text, isNew, isSelected, isTested } = Astro.props;
 const selectedClasses = "text-ctp-blue hover:text-ctp-blue-600";
 ---
 
 <li>
   <a
     class={cn(
-      "relative flex gap-2 font-medium hover:underline mb-2",
+      "relative flex gap-2 font-medium hover:underline mb-2 items-center",
       isSelected && selectedClasses,
     )}
     href={href}
   >
     {text}
+    {isTested && <FlaskIcon class="h-4 w-4 fill-current text-ctp-green" />}
     {
       isNew && (
         <span class="whitespace-nowrap rounded-lg bg-lime-400/20 px-2 text-xs/6 font-semibold text-lime-700">

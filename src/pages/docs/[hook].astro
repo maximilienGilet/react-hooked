@@ -3,7 +3,7 @@ import DocsLayout from "@/layouts/DocsLayout.astro";
 import AlertBox from "@/components/AlertBox.astro";
 import PackageCommand from "@/components/PackageCommand.astro";
 import DownloadCommand from "@/components/DownloadCommand.astro";
-import { extractHookName } from "@/utils/hooks";
+import { extractHookName, getHooks, getTests } from "@/utils/hooks";
 import jsDoc2JSON from "@/utils/jsdoc2json.ts";
 import CodeBox from "@/components/CodeBox.astro";
 import Example from "@/components/Example.tsx";
@@ -13,16 +13,8 @@ import FlaskIcon from "@/components/icons/FlaskIcon.astro";
 import QuestionIcon from "@/components/icons/QuestionIcon.astro";
 
 export async function getStaticPaths() {
-  const hooks: Record<string, string> = import.meta.glob("/src/hooks/*.ts", {
-    query: "?raw",
-    eager: true,
-    import: "default",
-  });
-
-  const tests: Record<string, string> = import.meta.glob(
-    "/src/tests/*.test.ts",
-    { query: "?raw", eager: true, import: "default" },
-  );
+  const hooks = getHooks();
+  const tests = getTests();
 
   const testsNames = Object.keys(tests).map((test) => extractHookName(test));
 
