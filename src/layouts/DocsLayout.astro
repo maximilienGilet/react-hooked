@@ -2,8 +2,9 @@
 import { ViewTransitions } from "astro:transitions";
 import MobileNavbar from "@/components/nav/MobileNavbar.astro";
 import Navbar from "@/components/nav/Navbar.astro";
-import { getHooksNames } from "@/utils/hooks";
+import { getHooksNames, getTestNames } from "@/utils/hooks";
 import MainNav from "@/components/nav/MainNav.astro";
+import type { Hook } from "@/types/hook";
 
 interface Props {
   title: string;
@@ -11,8 +12,16 @@ interface Props {
 }
 
 const hookNames = getHooksNames();
+const testNames = getTestNames();
+
+const hooks: Hook[] = hookNames.map((name) => ({
+  name,
+  isTested: testNames.includes(name),
+}));
+
 const { title, selectedPage } = Astro.props;
 ---
+
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -33,7 +42,7 @@ const { title, selectedPage } = Astro.props;
       <div class="px-6 lg:px-8">
         <div class="mx-auto max-w-xl lg:max-w-7xl">
           <div class="mx-auto flex max-w-xl items-start gap-x-12 lg:max-w-7xl">
-            <Navbar items={hookNames} selectedPage={selectedPage} />
+            <Navbar hooks={hooks} selectedPage={selectedPage} />
             <main class="min-w-0 flex-1 gap-x-12 pb-16 pt-8 lg:pt-12">
               <slot />
             </main>

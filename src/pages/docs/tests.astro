@@ -1,0 +1,52 @@
+---
+import CodeBox from "@/components/CodeBox.astro";
+import FlaskIcon from "@/components/icons/FlaskIcon.astro";
+import DocsLayout from "@/layouts/DocsLayout.astro";
+---
+
+<DocsLayout title="Getting started" selectedPage="testing">
+  <article class="mx-auto max-w-3xl">
+    <h1 class="mb-6 text-5xl">How to setup tests</h1>
+    <p class="mb-8 text-xl">
+      Hooks marked with the <FlaskIcon
+        class="inline h-4 w-4 fill-current text-ctp-green"
+      /> icon comes with a test file that you can use to test the hook.
+    </p>
+    <div class="flex flex-col gap-6">
+      <p>
+        Tests are written with <a
+          href="https://vitest.dev/"
+          target="_blank"
+          class="text-ctp-blue hover:underline">Vitest</a
+        >, and <a
+          href="https://testing-library.com/"
+          target="_blank"
+          class="text-ctp-blue hover:underline">Testing Library</a
+        >
+      </p>
+      <p>
+        To run the tests, you need to install the <a
+          href="https://www.npmjs.com/package/vitest"
+          target="_blank"
+          class="text-ctp-blue hover:underline">vitest</a
+        > package and <a
+          href="https://www.npmjs.com/package/@testing-library/react"
+          target="_blank"
+          class="text-ctp-blue hover:underline">@testing-library/react</a
+        > package.
+        <CodeBox
+          code={"npm install --save-dev vitest @testing-library/react @testing-library/dom @types/react @types/react-dom"}
+          lang="bash"
+          class="rounded-xl shadow-xl"
+        />
+      </p>
+      <p>
+        Then, configure Vitest using the <a
+          href="https://vitest.dev/guide/"
+          target="_blank"
+          class="text-ctp-blue hover:underline">Vitest guide</a
+        >.
+      </p>
+    </div>
+  </article>
+</DocsLayout>
