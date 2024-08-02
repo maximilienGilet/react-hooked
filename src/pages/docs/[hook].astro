@@ -9,6 +9,8 @@ import CodeBox from "@/components/CodeBox.astro";
 import Example from "@/components/Example.tsx";
 import { capitalize } from "@/utils/strings";
 import ExpandIcon from "@/components/icons/ExpandIcon.astro";
+import FlaskIcon from "@/components/icons/FlaskIcon.astro";
+import QuestionIcon from "@/components/icons/QuestionIcon.astro";
 
 export async function getStaticPaths() {
   const hooks: Record<string, string> = import.meta.glob("/src/hooks/*.ts", {
@@ -16,6 +18,14 @@ export async function getStaticPaths() {
     eager: true,
     import: "default",
   });
+
+  const tests: Record<string, string> = import.meta.glob(
+    "/src/tests/*.test.ts",
+    { query: "?raw", eager: true, import: "default" },
+  );
+
+  const testsNames = Object.keys(tests).map((test) => extractHookName(test));
+
   const examples: Record<string, string> = import.meta.glob(
     "/src/examples/*.tsx",
     { query: "?raw", eager: true, import: "default" },
@@ -25,14 +35,17 @@ export async function getStaticPaths() {
     const doc = jsDoc2JSON(hooks[hook]);
     const example =
       examples[`/src/examples/${capitalize(hookName)}Example.tsx`];
+    const test = testsNames.includes(hookName)
+      ? tests[`/src/tests/${hookName}.test.ts`]
+      : null;
     return {
       params: { hook: hookName },
-      props: { hook: hooks[hook], hookName, doc, example },
+      props: { hook: hooks[hook], hookName, doc, example, test },
     };
   });
 }
 
-const { hookName, hook, doc, example } = Astro.props;
+const { hookName, hook, doc, example, test } = Astro.props;
 
 const requiredPackages = doc.tags.filter(
   (el) => el.tag === "requires" && el.type === "package",
@@ -46,7 +59,16 @@ const requiredLocals = doc.tags.filter(
   <div
     class="relative mb-4 flex flex-wrap-reverse items-center justify-between gap-4"
   >
-    <h1 class="text-3xl">{hookName}</h1>
+    <h1 class="flex flex-wrap items-baseline gap-3 text-3xl">
+      {hookName}
+      {
+        test && (
+          <span class="flex items-center gap-1 rounded-lg bg-ctp-green/10 px-2 py-0.5 text-sm text-ctp-green">
+            <FlaskIcon class="h-4 w-4 fill-current" /> Tested
+          </span>
+        )
+      }
+    </h1>
     <button
       data-action="showDownloadOptions"
       class="ml-auto inline-flex items-center rounded-lg bg-ctp-blue px-4 py-2 text-ctp-base shadow transition-all hover:bg-ctp-pink hover:shadow-lg"
@@ -310,9 +332,36 @@ const requiredLocals = doc.tags.filter(
 
     <CodeBox code={hook.trim()} lang="ts" class="rounded-xl shadow-xl" />
   </section>
+
+  {
+    test && (
+      <section class="mt-12">
+        <div class="mb-4 flex flex-wrap items-center justify-between gap-4">
+          <h2 class="text-2xl">Tests</h2>
+          <div class="flex items-center gap-4">
+            <a
+              href="/docs/tests"
+              class="text-ctp-text/75 hover:text-ctp-text"
+              title="How to setup tests"
+            >
+              <QuestionIcon class="h-4 w-4 fill-current" />
+            </a>
+            <button
+              data-action="download-test"
+              class="ml-auto inline-flex items-center gap-2 rounded-lg bg-ctp-blue px-4 py-2 text-ctp-base shadow transition-all hover:bg-ctp-pink hover:shadow-lg"
+            >
+              <FlaskIcon class="h-4 w-4 fill-current" /> Download tests
+            </button>
+          </div>
+        </div>
+
+        <CodeBox code={test.trim()} lang="ts" class="rounded-xl shadow-xl" />
+      </section>
+    )
+  }
 </DocsLayout>
 
-<script is:inline define:vars={{ hookName, hook }}>
+<script is:inline define:vars={{ hookName, hook, test }}>
   // Download button
   const downloadButtons = document.querySelectorAll('[data-action="download"]');
   downloadButtons.forEach((downloadButton) => {
@@ -325,6 +374,20 @@ const requiredLocals = doc.tags.filter(
       a.click();
       URL.revokeObjectURL(url);
     });
+  });
+
+  // Download test button
+  const downloadTestButton = document.querySelector(
+    '[data-action="download-test"]',
+  );
+  downloadTestButton.addEventListener("click", () => {
+    const blob = new Blob([test.trim()], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${hookName}.test.ts`;
+    a.click();
+    URL.revokeObjectURL(url);
   });
 
   // Copy button
