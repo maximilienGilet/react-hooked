@@ -35,8 +35,9 @@ You can contribute by adding new hooks or by fixing bugs.
 1. Fork the repo
 2. Create a new branch
 3. Add your hook in the `src/hooks` folder - JSDoc must be added with the correct types
-4. Add an example in the `examples` folder - The example file must be named `Use{HookName}Example.tsx`
-5. Create a pull request
+5. Add an example in the `src/examples` folder - The example file must be named `Use{HookName}Example.tsx`
+6. Add a test in the `src/tests` folder - The file must be named `use{HookName}.test.ts`
+7. Create a pull request
 
 ### Best practices
 
