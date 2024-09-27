@@ -12,11 +12,24 @@ const { hookName } = Astro.props;
 
 <section class="ctp-frappe flex flex-row flex-wrap">
   <input
+    id="tab-shadcn"
+    type="radio"
+    name="download-tabs"
+    class="peer/tab-shadcn absolute opacity-0"
+    checked
+  />
+  <label
+    for="tab-shadcn"
+    class="flex cursor-pointer flex-row items-stretch gap-2 rounded-t-lg bg-ctp-surface1 p-2 px-4 text-ctp-text peer-checked/tab-shadcn:bg-ctp-base"
+  >
+    Shadcn
+  </label>
+
+  <input
     id="tab-curl"
     type="radio"
     name="download-tabs"
     class="peer/tab-curl absolute opacity-0"
-    checked
   />
   <label
     for="tab-curl"
@@ -40,6 +53,13 @@ const { hookName } = Astro.props;
 
   <div class="h-0 basis-full"></div>
 
+  <div class="hidden w-full peer-checked/tab-shadcn:block">
+    <CodeBox
+      code={`npx shadcn add "${site}/raw/${hookName}.json"`}
+      lang="bash"
+      class="rounded-lg rounded-tl-none"
+    />
+  </div>
   <div class="hidden w-full peer-checked/tab-curl:block">
     <CodeBox
       code={`curl ${site}/raw/${hookName}.ts --output src/hooks/${hookName}.ts`}
