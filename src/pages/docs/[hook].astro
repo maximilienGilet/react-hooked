@@ -376,15 +376,17 @@ const requiredLocals = doc.tags.filter(
   const downloadTestButton = document.querySelector(
     '[data-action="download-test"]',
   );
-  downloadTestButton.addEventListener("click", () => {
-    const blob = new Blob([test.trim()], { type: "text/plain" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `${hookName}.test.ts`;
-    a.click();
-    URL.revokeObjectURL(url);
-  });
+  if (downloadTestButton) {
+    downloadTestButton.addEventListener("click", () => {
+      const blob = new Blob([test.trim()], { type: "text/plain" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${hookName}.test.ts`;
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+  }
 
   // Copy button
   const copyButtons = document.querySelectorAll('[data-action="copy"]');
