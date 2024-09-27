@@ -22,9 +22,11 @@ Why bother with an extra dependency when you can just grab the hooks you need ?
 
 ## CLI Usage
 
-For now, you can grab the hooks you need from the website or use curl/wget provided in the examples.
+You can get all hooks with the following CLI options : 
 
-A CLI will be available soon.
+- Shadcn CLI
+- CURL
+- WGET
 
 ## How to contribute ?
 
