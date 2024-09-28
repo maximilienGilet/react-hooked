@@ -40,10 +40,11 @@ interface Props {
       src="https://plausible.mgilet.xyz/js/script.file-downloads.outbound-links.js"
     ></script>
     <script>
-      window.plausible =
-        window.plausible ||
+      (window as any).plausible =
+        (window as any).plausible ||
         function () {
-          (window.plausible.q = window.plausible.q || []).push(arguments);
+          ((window as any).plausible.q =
+            (window as any).plausible.q || []).push(arguments);
         };
     </script>
     <ViewTransitions />
