@@ -16,7 +16,7 @@ type CookiesReturn = [
  * 2. A function to update the cookie value.
  * 3. A function to delete the cookie.
  */
-export default function (cookieName: string): CookiesReturn {
+export default function useCookie(cookieName: string): CookiesReturn {
   const [value, setValue] = useState<string | null>(
     () => Cookies.get(cookieName) || null,
   );
